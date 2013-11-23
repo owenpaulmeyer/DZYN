@@ -20,9 +20,13 @@ class Edge {
     return new Edge( x * -1, y * -1 );
   }
   
-  boolean equals(Edge e){
+  public boolean equals( Object obj ){
+    if ( obj == this ) return true;
+    if ( obj == null || obj.getClass( ) != getClass( ) ) return false;
+    Edge e = ( Edge ) obj;
     return this.x == e.x() && this.y == e.y();
-  }  
+  }
+  
   boolean isNorth(){
     return (x==0 && y==-1);
   }
