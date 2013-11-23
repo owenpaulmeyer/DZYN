@@ -3,15 +3,11 @@ class Edge {
   
   private int x;
   private int y;
-  
-  
-  
+
   Edge (int _x, int _y){
     x = _x;
     y = _y;
   }
-  
-
   
   final int x(){return x;}
   final int y(){return y;}
@@ -24,7 +20,7 @@ class Edge {
     if ( obj == this ) return true;
     if ( obj == null || obj.getClass( ) != getClass( ) ) return false;
     Edge e = ( Edge ) obj;
-    return this.x == e.x() && this.y == e.y();
+    return this.x==e.x() && this.y==e.y();
   }
   
   boolean isNorth(){
@@ -53,14 +49,14 @@ class Edge {
   }
   
   String toString() {
-    if( isNorth() ) return "North";
-    else if( isSouth() ) return "South";
-    else if( isWest() ) return "West";
-    else if( isEast() ) return "East";
-    else if( isNorthW() ) return "NorthW";
-    else if( isNorthE() ) return "NorthE";
-    else if( isSouthW() ) return "SouthW";
-    else if( isSouthE() ) return "SouthE";
+    if( isNorth() ) return "N";
+    else if( isSouth() ) return "S";
+    else if( isWest() ) return "W";
+    else if( isEast() ) return "E";
+    else if( isNorthW() ) return "NW";
+    else if( isNorthE() ) return "NE";
+    else if( isSouthW() ) return "SW";
+    else if( isSouthE() ) return "SE";
     else return "zero";
   }
 }
