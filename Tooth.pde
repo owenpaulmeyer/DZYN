@@ -65,48 +65,64 @@ class Line extends ArrayList< Edge > {
     }
     return true;
   }
+  */
 }
 
 class Fork extends Pair< Edge, Edge > {
+  /*
   //accounts for swapped order
   boolean equals( Fork f ) {
     if ( f.fst().equals( fst() ) ) return f.snd().equals( snd() );
     else if ( f.fst().equals( snd() ) ) return f.snd().equals( fst() );
     else return false;
   }
+  */
 }
 
-class Point extends Pair< Edge, Integer > {
+class Point{
+  Edge edge;
+  int  count;
   
   Point ( Edge e ) {
-    super( );
-    fst( e );
-    snd( 1 );
+    edge( e );
+    count( 1 );
   }
   
   Point ( Edge e, Integer i ) {
-    super( );
-    fst( e );
-    snd( i );
+    edge( e );
+    count( i );
   }
+  
+  void edge ( Edge e ) { edge = e; }
+  void count( int  i ) { count = i; }
+  
+  final Edge edge ( ) { return edge; }
+  final int  count( ) { return count; }
+  
+  public boolean equals( Object obj ){
+    if ( obj == this ) return true;
+    if ( obj == null || obj.getClass( ) != getClass( ) ) return false;
+    Point p = ( Point ) obj;
+    return p.edge( ).equals( edge( ) );
+  }
+  
   
   /*
-  boolean equals( Point p ) {
-    return p.fst( ).equals( fst( ) );
+  public boolean equals( Object e ) {
+    if ( e == null ) return false;
+    return edge( ).equals( ((Point)e).edge( ) );
   }
   */
-  
-  boolean equals( Edge e ) { return fst( ).equals( e ); }
-  
-  void incrementCount( ) { snd( snd( ) + 1 ); }
+  void incrementCount( ) { count( count( ) + 1 ); }
   
   String toString( ) {
-    String s = "( " + fst( ).toString( ) + ", Count: " + snd( ).toString( ) + " )";
+    String s = "( " + edge( ).toString( ) + ", Count: " + count( ) + " )";
     return s;
   }
 }
 
 class Points extends ArrayList< Point > {
+  /*
   boolean equals( Points ps ) {
     Iterator< Point > itr = iterator( );
     while ( itr.hasNext( ) ) {
