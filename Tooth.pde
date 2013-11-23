@@ -56,27 +56,32 @@ class Tooth {
 
 //Sequentially equated
 class Line extends ArrayList< Edge > {
-  /*
-  boolean equals( Line line ) {
+  
+  public boolean equals( Object obj ){
+    if ( obj == this ) return true;
+    if ( obj == null || obj.getClass( ) != getClass( ) ) return false;
+    Line line = ( Line ) obj;
     Iterator< Edge > itr_this = iterator( );
     Iterator< Edge > itr_line = line.iterator( );
     while ( itr_this.hasNext( ) && itr_line.hasNext( ) ) {
       if ( ! itr_this.next( ).equals( itr_line.next( ) ) ) return false;
     }
     return true;
-  }
-  */
+  }  
 }
 
 class Fork extends Pair< Edge, Edge > {
-  /*
+  
   //accounts for swapped order
-  boolean equals( Fork f ) {
+  public boolean equals( Object obj ){
+    if ( obj == this ) return true;
+    if ( obj == null || obj.getClass( ) != getClass( ) ) return false;
+    Fork f = ( Fork ) obj;
     if ( f.fst().equals( fst() ) ) return f.snd().equals( snd() );
     else if ( f.fst().equals( snd() ) ) return f.snd().equals( fst() );
     else return false;
   }
-  */
+  
 }
 
 class Point{
@@ -105,14 +110,7 @@ class Point{
     Point p = ( Point ) obj;
     return p.edge( ).equals( edge( ) );
   }
-  
-  
-  /*
-  public boolean equals( Object e ) {
-    if ( e == null ) return false;
-    return edge( ).equals( ((Point)e).edge( ) );
-  }
-  */
+
   void incrementCount( ) { count( count( ) + 1 ); }
   
   String toString( ) {
@@ -122,15 +120,18 @@ class Point{
 }
 
 class Points extends ArrayList< Point > {
-  /*
-  boolean equals( Points ps ) {
+  
+  public boolean equals( Object obj ){
+    if ( obj == this ) return true;
+    if ( obj == null || obj.getClass( ) != getClass( ) ) return false;
+    Points ps = ( Points ) obj;
     Iterator< Point > itr = iterator( );
     while ( itr.hasNext( ) ) {
       if ( !ps.contains( itr.next( ) ) ) return false;
     }
     return true;
   }
-  */
+  
 }
 
 
