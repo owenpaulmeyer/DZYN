@@ -14,11 +14,11 @@ class Node {
   
   void addAdj( Pair< Edge, Double > adj ) { adjacents.add( adj ); }
   
-  Location loc( ) { return loc; }
+  final Location loc( ) { return loc; }
   
-  double weight( ) { return weight; }
+  final double weight( ) { return weight; }
   
-  ArrayList< Pair< Edge, Double > > adjacents( ) { return adjacents; }
+  final ArrayList< Pair< Edge, Double > > adjacents( ) { return adjacents; }
   
   boolean equals ( Node n ) {
     return n.loc( ).equals( n.loc() );

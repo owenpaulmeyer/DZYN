@@ -10,12 +10,17 @@ class Pair < T1, T2 > {
   
   void setsnd ( T2 t2 ) { snd = t2; }
   
-  T1 fst( ) { return fst; }
+  final T1 fst( ) { return fst; }
   
-  T2 snd( ) { return snd; }
+  final T2 snd( ) { return snd; }
   
   void fst( T1 o ) { fst = o; }
   
   void snd( T2 o ) { snd = o; }
+  
+  String toString( ) {
+    String s = "( " + fst( ).toString( ) + ", " + snd( ).toString( ) + " )";
+    return s;
+  }
 
 }

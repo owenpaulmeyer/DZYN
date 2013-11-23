@@ -11,11 +11,10 @@ class Edge {
     y = _y;
   }
   
-  int xval( ) { return x; }
-  int yval( ) { return y; }
+
   
-  int x(){return x;}
-  int y(){return y;}
+  final int x(){return x;}
+  final int y(){return y;}
   
   Edge inverse() {
     return new Edge( x * -1, y * -1 );

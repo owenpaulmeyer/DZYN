@@ -4,8 +4,8 @@ class Ratio {
   
   Ratio ( double _num, double _den ) { num = _num; den = _den; }
   
-  double numerator( ) { return num; }
-  double denominator( ) { return den; }
+  final double numerator( ) { return num; }
+  final double denominator( ) { return den; }
   
   double eval( ) {
     return num / den;
