@@ -17,11 +17,12 @@ class Tooth {
     root.snd( t.root.snd() );
     count = t.count;
   }
-  
+  /*
   //stand in to test
   boolean equals( Tooth t ) {
     return crown.equals( t.crown ) && root.equals( t.root );
   }
+  */
   
   void expandCrown( Edge e ) { crown.add( e ); }
   
@@ -29,8 +30,10 @@ class Tooth {
   void forkLeft ( Edge e ) { root.snd( e ); }
   
   void addPoint( Edge e ) {
-    if ( points.contains( e ) )
-      points.get( points.indexOf( e ) ).incrementCount( );
+    Point p = new Point( e, 1 );
+    if ( points.contains( p ) ) {
+      points.get( points.indexOf( p ) ).incrementCount( );
+    }
     else points.add( new Point( e, 1 ) );
   }    
   
@@ -53,6 +56,7 @@ class Tooth {
 
 //Sequentially equated
 class Line extends ArrayList< Edge > {
+  /*
   boolean equals( Line line ) {
     Iterator< Edge > itr_this = iterator( );
     Iterator< Edge > itr_line = line.iterator( );
