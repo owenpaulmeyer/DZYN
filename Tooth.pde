@@ -32,18 +32,22 @@ class Tooth {
     if ( points.contains( e ) )
       points.get( points.indexOf( e ) ).incrementCount( );
     else points.add( new Point( e, 1 ) );
-  }
-    
+  }    
   
-  Line crown   ( ) { return crown; }
-  Fork root    ( )  { return root; }
-  Points points( ) { return points; }
-  int count    ( ) { return count; }
+  final Line crown   ( ) { return crown; }
+  final Fork root    ( )  { return root; }
+  final Points points( ) { return points; }
+  final int count    ( ) { return count; }
   
   void display( ) {
-    println( "Points: " );
-    println( points );
-    
+    //println( "Tooth:" );
+    println( "  Points:" );
+    println( "    " + points );
+    println( "  Crown:" );
+    println( "    " + crown );
+    println( "  Root:" );
+    println( "    " + root );
+    println( "  Count:  " + count );
   }
 }
 
@@ -69,18 +73,33 @@ class Fork extends Pair< Edge, Edge > {
 }
 
 class Point extends Pair< Edge, Integer > {
+  
+  Point ( Edge e ) {
+    super( );
+    fst( e );
+    snd( 1 );
+  }
+  
   Point ( Edge e, Integer i ) {
     super( );
     fst( e );
     snd( i );
   }
+  
+  /*
   boolean equals( Point p ) {
     return p.fst( ).equals( fst( ) );
   }
+  */
   
   boolean equals( Edge e ) { return fst( ).equals( e ); }
   
   void incrementCount( ) { snd( snd( ) + 1 ); }
+  
+  String toString( ) {
+    String s = "( " + fst( ).toString( ) + ", Count: " + snd( ).toString( ) + " )";
+    return s;
+  }
 }
 
 class Points extends ArrayList< Point > {
