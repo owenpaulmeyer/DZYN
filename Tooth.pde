@@ -1,3 +1,4 @@
+
 class Tooth {
   private Line crown = new Line( );
   private Fork root = new Fork( );
@@ -17,12 +18,11 @@ class Tooth {
     root.snd( t.root.snd() );
     count = t.count;
   }
-  /*
+
   //stand in to test
   boolean equals( Tooth t ) {
     return crown.equals( t.crown ) && root.equals( t.root );
   }
-  */
   
   void expandCrown( Edge e ) { crown.add( e ); }
   
@@ -35,7 +35,20 @@ class Tooth {
       points.get( points.indexOf( p ) ).incrementCount( );
     }
     else points.add( new Point( e, 1 ) );
-  }    
+  }
+  
+  void addPoint( Point p ) {
+    if ( points.contains( p ) ) {
+      points.get( points.indexOf( p ) ).incrementCount( );
+    }
+    else points.add( new Point( e, 1 ) );
+  }
+  
+  void addPoints( Points ps ) {
+    for ( Point p : ps ) addPoint( p );
+  }
+  
+  void incrementCount( ) { ++count; }
   
   final Line crown   ( ) { return crown; }
   final Fork root    ( )  { return root; }
