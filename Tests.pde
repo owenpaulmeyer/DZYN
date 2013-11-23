@@ -19,9 +19,9 @@ void setup ( ) {
   Tooth t2 = new Tooth ( t1 );
   t1.addPoint( w );
   t2.addPoint( nw );
-  println( "Tooth2:" );
-  t2.display( );
-  println( "Tooth1:" );
-  t1.display( );
+  print( "Tooth2:" );
+  println( t2 );
+  print( "Tooth1:" );
+  println( t1 );
 
 }
