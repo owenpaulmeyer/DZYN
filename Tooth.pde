@@ -97,34 +97,33 @@ class Fork extends Pair< Edge, Edge > {
   //accounts for swapped order
   public boolean equals( Object obj ){
     if ( obj == this ) return true;
+    
     if ( obj == null || obj.getClass( ) != getClass( ) ) return false;
+    
     Fork f = ( Fork ) obj;
+    
     if ( f.fst().equals( fst() ) ) return f.snd().equals( snd() );
+    
     else if ( f.fst().equals( snd() ) ) return f.snd().equals( fst() );
+    
     else return false;
   }
-  
 }
 
-class Point{
-  Edge edge;
-  int  count;
+class Point extends Pair< Edge, Integer >{
   
   Point ( Edge e ) {
-    edge( e );
-    count( 1 );
+    fst( e );
+    snd( 1 );
   }
   
   Point ( Edge e, Integer i ) {
-    edge( e );
-    count( i );
+    fst( e );
+    snd( i );
   }
   
-  void edge ( Edge e ) { edge = e; }
-  void count( int  i ) { count = i; }
-  
-  final Edge edge ( ) { return edge; }
-  final int  count( ) { return count; }
+  final Edge edge ( ) { return fst( ); }
+  final int  count( ) { return snd( ); }
   
   public boolean equals( Object obj ){
     if ( obj == this ) return true;
@@ -133,7 +132,7 @@ class Point{
     return p.edge( ).equals( edge( ) );
   }
 
-  void incrementCount( ) { count( count( ) + 1 ); }
+  void incrementCount( ) { snd( count( ) + 1 ); }
   
   String toString( ) {
     String s = "( " + edge( ).toString( ) + ", Count: " + count( ) + " )";
