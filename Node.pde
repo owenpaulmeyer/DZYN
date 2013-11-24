@@ -1,48 +1,54 @@
 class Node {
 
-  private int xloc;
-  private int yloc;
   private ArrayList< Edge > adjacents;
   
-  Node ( Location l ) { loc = l; }
+  Node (  ) { adjacents = new ArrayList< Edge >( ); }
   
-  Node ( Location l, ArrayList< Edge > adj ) {
-    loc = l;
+  Node ( ArrayList< Edge > adj ) {
     adjacents = adj;
   }
   
   void addAdj( Edge adj ) { adjacents.add( adj ); }
   
-  final Location loc( ) { return loc; }
-  
   final ArrayList< Edge > adjacents( ) { return adjacents; }
-  
-  boolean equals ( Node n ) {
-    return n.loc( ).equals( n.loc() );
-  }
+
 }
 
 class GNode {
-  //Weight usage is unknown at this point
-  private int xloc;
-  private int yloc;
+  //NodeWeight usage is unknown at this point
   private double weight = 1.0;
   private ArrayList< WeightedEdge > adjacents;
   
-  GNode ( Location l ) { loc = l; }
+  GNode (  ) { adjacents = new ArrayList< WeightedEdge >( ); }
   
-  GNode ( Location l, ArrayList< WeightedEdge > adj ) {
-    loc = l;
+  GNode ( ArrayList< WeightedEdge > adj ) {
     adjacents = adj;
   }
   
   void addAdj( WeightedEdge adj ) { adjacents.add( adj ); }
   
-  final Location loc( ) { return loc; }
   final double weight( ) { return weight; }
   final ArrayList< WeightedEdge > adjacents( ) { return adjacents; }
+
+}
+
+class Location {
+  int x;
+  int y;
   
-  boolean equals ( Node n ) {
-    return n.loc( ).equals( n.loc() );
+  Location( ) { }
+  Location( int _x, int _y ) { x = _x; y = _y; }
+  
+  void xloc( int _x ) { x = _x; }
+  void yloc( int _y ) { y = _y; }
+  
+  final int xloc( ) { return x; }
+  final int yloc( ) { return y; }
+
+  public boolean equals( Object obj ){
+    if ( obj == this ) return true;    
+    if ( obj == null || obj.getClass( ) != getClass( ) ) return false;    
+    Location l = ( Location ) obj;
+    return l.xloc( ) == xloc( ) && l.yloc( ) == yloc( );
   }
 }
