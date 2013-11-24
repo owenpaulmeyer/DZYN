@@ -1,6 +1,7 @@
 class Node {
 
-  private Location loc;
+  private int xloc;
+  private int yloc;
   private ArrayList< Edge > adjacents;
   
   Node ( Location l ) { loc = l; }
@@ -23,7 +24,8 @@ class Node {
 
 class GNode {
   //Weight usage is unknown at this point
-  private Location loc;
+  private int xloc;
+  private int yloc;
   private double weight = 1.0;
   private ArrayList< WeightedEdge > adjacents;
   
