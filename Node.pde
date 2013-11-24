@@ -11,7 +11,7 @@ class Node {
   void addAdj( Edge adj ) { adjacents.add( adj ); }
   
   final ArrayList< Edge > adjacents( ) { return adjacents; }
-
+  final int degree   ( ) { return adjacents.size( ); }
 }
 
 class GNode {
@@ -29,7 +29,7 @@ class GNode {
   
   final double weight( ) { return weight; }
   final ArrayList< WeightedEdge > adjacents( ) { return adjacents; }
-
+  final int degree   ( ) { return adjacents.size( ); }
 }
 
 class Location {
@@ -43,7 +43,8 @@ class Location {
   
   final int xloc( ) { return x; }
   final int yloc( ) { return y; }
-
+  
+  
   public boolean equals( Object obj ){
     if ( obj == this ) return true;    
     if ( obj == null || obj.getClass( ) != getClass( ) ) return false;    

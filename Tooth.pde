@@ -56,6 +56,7 @@ class Tooth {
   final Points points( ) { return points; }
   final int count    ( ) { return count; }
   
+  
   JSONObject toJSON( ) {
     JSONObject jsn = new JSONObject( );
     jsn.setJSONObject( "points", points.toJSON( ) );
