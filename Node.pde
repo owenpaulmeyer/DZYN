@@ -39,8 +39,7 @@ class Location {
   Location( ) { }
   Location( int _x, int _y ) { x = _x; y = _y; }
   
-  void xloc( int _x ) { x = _x; }
-  void yloc( int _y ) { y = _y; }
+  void setXY( int _x, int _y ) { x = _x; y = _y; }
   
   final int xloc( ) { return x; }
   final int yloc( ) { return y; }
