@@ -6,10 +6,6 @@ class Pair < T1, T2 > {
   
   Pair ( T1 t1, T2 t2 ) { fst = t1; snd = t2; }
   
-  void setfst ( T1 t1 ) { fst = t1; }
-  
-  void setsnd ( T2 t2 ) { snd = t2; }
-  
   final T1 fst( ) { return fst; }
   
   final T2 snd( ) { return snd; }

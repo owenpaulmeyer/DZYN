@@ -11,7 +11,7 @@ class Ratio {
     num += r.numerator( );
     den += r.denominator( );
   }
-  
+
   double eval( ) {
     return num / den;
   }

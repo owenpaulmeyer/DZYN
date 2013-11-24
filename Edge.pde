@@ -48,6 +48,13 @@ class Edge {
     return (x==1 && y==1);
   }
   
+  JSONObject toJSON( ) {
+    JSONObject jsn = new JSONObject( );
+    jsn.setInt( "x", x( ) );
+    jsn.setInt( "y", y( ) );
+    return jsn;
+ }
+  
   String toString() {
     if( isNorth() ) return "N";
     else if( isSouth() ) return "S";

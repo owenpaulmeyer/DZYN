@@ -14,8 +14,6 @@ class Node {
   
   final Location loc( ) { return loc; }
   
-
-  
   final ArrayList< Edge > adjacents( ) { return adjacents; }
   
   boolean equals ( Node n ) {
@@ -45,6 +43,4 @@ class GNode {
   boolean equals ( Node n ) {
     return n.loc( ).equals( n.loc() );
   }
-   
-
 }

@@ -7,5 +7,10 @@ class Location {
   final int x( ) { return x; }
   final int y( ) { return y; }
   
-  boolean equals( Location l ) { return l.x()==x && l.y()==y; }
+  public boolean equals( Object obj ){
+    if ( obj == this ) return true;    
+    if ( obj == null || obj.getClass( ) != getClass( ) ) return false;    
+    Location l = ( Location ) obj;    
+    return l.x()==x && l.y()==y;
+  }
 }
