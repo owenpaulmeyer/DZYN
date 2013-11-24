@@ -55,6 +55,11 @@ class Tooth {
   final Points points( ) { return points; }
   final int count    ( ) { return count; }
   
+  String toString( ) {
+    String s = "\n  Points: "+points+"\n  Crown:  "+crown+"\n  Root:   "+root;
+    return s;
+  }
+  
   void display( ) {
     //println( "Tooth:" );
     println( "  Points:" );
@@ -72,10 +77,14 @@ class Line extends ArrayList< Edge > {
   
   public boolean equals( Object obj ){
     if ( obj == this ) return true;
+    
     if ( obj == null || obj.getClass( ) != getClass( ) ) return false;
+    
     Line line = ( Line ) obj;
+    
     Iterator< Edge > itr_this = iterator( );
     Iterator< Edge > itr_line = line.iterator( );
+    
     while ( itr_this.hasNext( ) && itr_line.hasNext( ) ) {
       if ( ! itr_this.next( ).equals( itr_line.next( ) ) ) return false;
     }
