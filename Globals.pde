@@ -6,3 +6,14 @@
   final Edge ne = new Edge(1, -1);
   final Edge sw = new Edge(-1, 1);
   final Edge se = new Edge(1, 1);
+  
+  final Edge reflectY( Edge edge ) {
+    return new Edge( edge.x( ), edge.y( ) * -1 );
+  }
+  
+  final Edge reflectX( Edge edge ) {
+    return new Edge( edge.x( ) * -1, edge.y( ) );
+  }
+  
+  
+

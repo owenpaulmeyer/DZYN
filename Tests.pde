@@ -59,6 +59,8 @@ void setup ( ) {
   println( "Teeth:" );
   println( teeth );
 */
+
+/*
   //JSON Test
   Tooth tooth = new Tooth( );
   tooth.addPoint( nw );
@@ -68,6 +70,9 @@ void setup ( ) {
   tooth.forkLeft( e );
   JSONObject jsn = tooth.toJSON( );
   print( jsn );
+*/
+
+
 }
 
 

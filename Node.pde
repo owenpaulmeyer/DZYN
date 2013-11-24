@@ -12,6 +12,22 @@ class Node {
   
   final ArrayList< Edge > adjacents( ) { return adjacents; }
   final int degree   ( ) { return adjacents.size( ); }
+  
+  Node nodeReflectX( ) {
+    ArrayList< Edge > adj = new ArrayList< Edge >( );
+    for ( Edge e : adjacents( ) ) {
+      adj.add( reflectX( e ) );
+    }
+    return new Node( adj );
+  }
+  
+  Node nodeReflectY( ) {
+    ArrayList< Edge > adj = new ArrayList< Edge >( );
+    for ( Edge e : adjacents( ) ) {
+      adj.add( reflectY( e ) );
+    }
+    return new Node( adj );
+  }
 }
 
 class GNode {
@@ -32,23 +48,3 @@ class GNode {
   final int degree   ( ) { return adjacents.size( ); }
 }
 
-class Location {
-  int x;
-  int y;
-  
-  Location( ) { }
-  Location( int _x, int _y ) { x = _x; y = _y; }
-  
-  void setXY( int _x, int _y ) { x = _x; y = _y; }
-  
-  final int xloc( ) { return x; }
-  final int yloc( ) { return y; }
-  
-  
-  public boolean equals( Object obj ){
-    if ( obj == this ) return true;    
-    if ( obj == null || obj.getClass( ) != getClass( ) ) return false;    
-    Location l = ( Location ) obj;
-    return l.xloc( ) == xloc( ) && l.yloc( ) == yloc( );
-  }
-}
