@@ -8,6 +8,12 @@ class Node {
     adjacents = adj;
   }
   
+  Node ( Node n ) {
+    adjacents = new ArrayList< Edge > ( );
+    for ( Edge e : n.adjacents( ) )
+      adjacents.add( e );
+  }
+  
   void addEdge( Edge adj ) { adjacents.add( adj ); }
   
   final ArrayList< Edge > adjacents( ) { return adjacents; }
