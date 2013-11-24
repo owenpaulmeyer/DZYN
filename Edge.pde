@@ -65,5 +65,15 @@ boolean isNull( Object a ) {
   return (a == null);
 }
 
+class WeightedEdge extends Edge {
+  Ratio weight = new Ratio ( 0, 0 );
+  
+  WeightedEdge( Edge e ) { super( e.x( ), e.y( ) ); }
+  
+  void balanceWeight( Ratio r ) {
+    weight.balance( r );
+  }
+}
+
 
 
