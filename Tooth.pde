@@ -8,9 +8,7 @@ class Tooth {
   Tooth ( ) { }
   
   Tooth ( Tooth t ) {
-    for ( Point p : t.points ) {
-      points.add( new Point( p.edge( ), p.count( ) ) );
-    }
+
     for ( Edge e : t.crown ) {
       crown.add( e );
     }
@@ -20,7 +18,10 @@ class Tooth {
   }
 
   //stand in to test
-  boolean equals( Tooth t ) {
+  public boolean equals( Object obj ){
+    if ( obj == this ) return true;    
+    if ( obj == null || obj.getClass( ) != getClass( ) ) return false;    
+    Tooth t = ( Tooth ) obj;
     return crown.equals( t.crown ) && root.equals( t.root );
   }
   
@@ -41,7 +42,7 @@ class Tooth {
     if ( points.contains( p ) ) {
       points.get( points.indexOf( p ) ).incrementCount( );
     }
-    else points.add( new Point( e, 1 ) );
+    else points.add( p );
   }
   
   void addPoints( Points ps ) {
@@ -56,10 +57,12 @@ class Tooth {
   final int count    ( ) { return count; }
   
   String toString( ) {
-    String s = "\n  Points: "+points+"\n  Crown:  "+crown+"\n  Root:   "+root;
+    String s = "\n  Points: "+points+"\n  Crown:  "+
+      crown+"\n  Root:   "+root+"\n  Count:  "+count+"\n";
     return s;
   }
   
+  //superflous
   void display( ) {
     //println( "Tooth:" );
     println( "  Points:" );
@@ -76,15 +79,12 @@ class Tooth {
 class Line extends ArrayList< Edge > {
   
   public boolean equals( Object obj ){
-    if ( obj == this ) return true;
-    
-    if ( obj == null || obj.getClass( ) != getClass( ) ) return false;
-    
-    Line line = ( Line ) obj;
-    
+    if ( obj == this ) return true;    
+    if ( obj == null || obj.getClass( ) != getClass( ) ) return false;    
+    Line line = ( Line ) obj;    
     Iterator< Edge > itr_this = iterator( );
     Iterator< Edge > itr_line = line.iterator( );
-    
+    if ( size( ) != line.size( ) ) return false;
     while ( itr_this.hasNext( ) && itr_line.hasNext( ) ) {
       if ( ! itr_this.next( ).equals( itr_line.next( ) ) ) return false;
     }
@@ -96,16 +96,11 @@ class Fork extends Pair< Edge, Edge > {
   
   //accounts for swapped order
   public boolean equals( Object obj ){
-    if ( obj == this ) return true;
-    
-    if ( obj == null || obj.getClass( ) != getClass( ) ) return false;
-    
-    Fork f = ( Fork ) obj;
-    
-    if ( f.fst().equals( fst() ) ) return f.snd().equals( snd() );
-    
-    else if ( f.fst().equals( snd() ) ) return f.snd().equals( fst() );
-    
+    if ( obj == this ) return true;    
+    if ( obj == null || obj.getClass( ) != getClass( ) ) return false;    
+    Fork f = ( Fork ) obj;    
+    if ( f.fst().equals( fst() ) ) return f.snd().equals( snd() );    
+    else if ( f.fst().equals( snd() ) ) return f.snd().equals( fst() );    
     else return false;
   }
 }
