@@ -8,11 +8,11 @@ class Node {
     adjacents = adj;
   }
   
-  void addAdj( Edge adj ) { adjacents.add( adj ); }
+  void addEdge( Edge adj ) { adjacents.add( adj ); }
   
   final ArrayList< Edge > adjacents( ) { return adjacents; }
   final int degree   ( ) { return adjacents.size( ); }
-  
+  //for assisting graph inputting
   Node nodeReflectX( ) {
     ArrayList< Edge > adj = new ArrayList< Edge >( );
     for ( Edge e : adjacents( ) ) {
@@ -20,7 +20,7 @@ class Node {
     }
     return new Node( adj );
   }
-  
+  //for assisting graph inputting
   Node nodeReflectY( ) {
     ArrayList< Edge > adj = new ArrayList< Edge >( );
     for ( Edge e : adjacents( ) ) {

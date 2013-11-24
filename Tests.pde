@@ -1,5 +1,6 @@
 void setup ( ) {
-  
+  smooth( );
+  strokeWeight( 2 );
 /*
   //Generic Pair Test:
   Pair < Integer, Integer > p1 = new Pair < Integer, Integer > ( 1 , 2 );
@@ -72,7 +73,22 @@ void setup ( ) {
   print( jsn );
 */
 
-
+  //Graph Tests
+  Graph design = new Graph( 2, 2 );
+  Node node = new Node( );
+  node.addEdge( n );
+  node.addEdge( s );
+  node.addEdge( w );
+  node.addEdge( e );
+  node.addEdge( nw );
+  node.addEdge( sw );
+  node.addEdge( ne );
+  node.addEdge( se );
+  design.addNode( 0, 0, node );
+  design.addNode( 0, 1, node );
+  design.addNode( 1, 0, node );
+  design.addNode( 1, 1, node );
+  design.display( 40, 30, 30 );
 }
 
 
