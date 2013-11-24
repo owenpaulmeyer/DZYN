@@ -38,7 +38,19 @@ class Graph {
   
   Teeth roots( Tooth tooth ) {
     Teeth teeth = new Teeth( );
-    
+    ArrayList< Edge > adjs = grid.get( current ).adjacents( );
+    int size = adjs.size( );
+    for ( int i = 0; i < size; ++i )
+      for ( int j = i + 1; j < size; ++j ) {
+        Tooth t = new Tooth( tooth );
+        t.forkRight( adjs.get( i ) );
+        t.forkLeft( adjs.get( j ) );
+        teeth.addTooth( t );
+      }
     return teeth;
   }
 }
+
+
+
+
