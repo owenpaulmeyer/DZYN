@@ -58,6 +58,17 @@ void setup ( ) {
   teeth.addTooth( t4 );
   println( "Teeth:" );
   println( teeth );
-
-  
+*/
+  //JSON Test
+  Tooth tooth = new Tooth( );
+  tooth.addPoint( nw );
+  tooth.addPoint( s );
+  tooth.expandCrown( e );
+  tooth.forkRight( se );
+  tooth.forkLeft( e );
+  JSONObject jsn = tooth.toJSON( );
+  print( jsn );
 }
+
+
+

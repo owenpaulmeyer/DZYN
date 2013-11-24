@@ -52,9 +52,18 @@ class Tooth {
   void incrementCount( ) { ++count; }
   
   final Line crown   ( ) { return crown; }
-  final Fork root    ( )  { return root; }
+  final Fork root    ( ) { return root; }
   final Points points( ) { return points; }
   final int count    ( ) { return count; }
+  
+  JSONObject toJSON( ) {
+    JSONObject jsn = new JSONObject( );
+    jsn.setJSONObject( "points", points.toJSON( ) );
+    jsn.setJSONObject( "crown", crown.toJSON( ) );
+    jsn.setJSONObject( "root", root.toJSON( ) );
+    jsn.setInt( "count", count );
+    return jsn;
+ }
   
   String toString( ) {
     String s = "\n  Points: "+points+"\n  Crown:  "+
@@ -89,7 +98,18 @@ class Line extends ArrayList< Edge > {
       if ( ! itr_this.next( ).equals( itr_line.next( ) ) ) return false;
     }
     return true;
-  }  
+  }
+  
+  JSONObject toJSON( ) {
+    JSONObject jsn = new JSONObject( );
+    JSONArray line = new JSONArray( );
+    for ( int i = 0; i < this.size( ); ++i ) {
+      JSONObject edge = this.get( i ).toJSON( );
+      line.setJSONObject( i, edge );
+    }
+    jsn.setJSONArray( "line", line );
+    return jsn;
+ }
 }
 
 class Fork extends Pair< Edge, Edge > {
@@ -103,6 +123,13 @@ class Fork extends Pair< Edge, Edge > {
     else if ( f.fst().equals( snd() ) ) return f.snd().equals( fst() );    
     else return false;
   }
+  
+  JSONObject toJSON( ) {
+    JSONObject jsn = new JSONObject( );
+    jsn.setJSONObject( "right", fst( ).toJSON( ) );
+    jsn.setJSONObject( "left", snd( ).toJSON( ) );
+    return jsn;
+ }
 }
 
 class Point extends Pair< Edge, Integer >{
@@ -129,6 +156,13 @@ class Point extends Pair< Edge, Integer >{
 
   void incrementCount( ) { snd( count( ) + 1 ); }
   
+  JSONObject toJSON( ) {
+    JSONObject jsn = new JSONObject( );
+    jsn.setJSONObject( "point", fst( ).toJSON( ) );
+    jsn.setInt( "count", snd( ) );
+    return jsn;
+ }
+  
   String toString( ) {
     String s = "( " + edge( ).toString( ) + ", Count: " + count( ) + " )";
     return s;
@@ -147,6 +181,17 @@ class Points extends ArrayList< Point > {
     }
     return true;
   }
+  
+  JSONObject toJSON( ) {
+    JSONObject jsn = new JSONObject( );
+    JSONArray points = new JSONArray( );
+    for ( int i = 0; i < this.size( ); ++i ) {
+      JSONObject point = this.get( i ).toJSON( );
+      points.setJSONObject( i, point );
+    }
+    jsn.setJSONArray( "points", points );
+    return jsn;
+ }
   
 }
 
