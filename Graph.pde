@@ -49,16 +49,19 @@ class Graph {
           tooth.addPoint( p );
         } 
       }
-      
+
       tooth.expandCrown( edge );
       currentLoc = loc.trace( edge );
       node = grid.get( currentLoc );
-      
+
       //in case of crown lines
-      while( node.degree( ) < 3 ) {
-        if ( node.degree( ) == 0 ) break;
-        node = trace( edge, currentLoc );
+      while( node.degree( ) <3 ) {
+        if ( node.degree( ) == 0 || node.degree( ) == 1 ) break;
+        edge = node.adjacents( ).get( 0 ).equals( edge ) ?
+                    node.adjacents( ).get( 0 ) : node.adjacents( ).get( 1 );
         tooth.expandCrown( edge );
+        currentLoc = currentLoc.trace( edge );
+        node = grid.get( currentLoc );
       }
       teeth.addTeeth( roots( tooth, currentLoc, edge ) );
     }

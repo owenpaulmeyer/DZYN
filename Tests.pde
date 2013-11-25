@@ -78,7 +78,7 @@ void setup ( ) {
   Graph design = testInput( );
   design.display( 20, 30, 30 );
   
-  Teeth teeth = design.aldente( new Location( 0, 0 ) );
+  Teeth teeth = design.aldente( new Location( 2, 0 ) );
   
   println( teeth );
 
