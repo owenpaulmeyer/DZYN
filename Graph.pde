@@ -18,11 +18,11 @@ class Graph {
     if( current == null ) current ( l );
   }
 
-  Node trace( Edge e ) {
-    current = new Location( current.xloc( ) + e.x( ),
-                   current.yloc( ) + e.y( ) );
-    return grid.get( current );
+  Node trace( Edge e, Location loc ) {
+    loc.trace( e );
+    return grid.get( loc );
   }
+  
   Teeth extract( ) {
     Teeth teeth = new Teeth( );
     Set set = grid.keySet( );
@@ -32,46 +32,57 @@ class Graph {
     }
     return teeth;
   }
-
   
   Teeth aldente( Location loc ) {
     Node node = grid.get( loc );
-    current( loc );
     Teeth teeth = new Teeth( );
+    Location currentLoc = null;
+    
     for ( Edge edge : node.adjacents( ) ) {
       Tooth tooth = new Tooth( );
-      node = trace( edge );
+      
+      //add the points to the tooth
+      for ( Edge e : node.adjacents( ) ) {
+        if ( e != edge ) {
+          Point p = new Point( e );
+          tooth.addPoint( p );
+          //println( "points: " + tooth.points( ) );
+        } 
+      }
+      
       tooth.expandCrown( edge );
+      currentLoc = loc.trace( edge );
+      node = grid.get( currentLoc );
+      
+      //in case of crown lines
       while( node.degree( ) < 3 ) {
         if ( node.degree( ) == 0 ) break;
-        node = trace( edge );
+        node = trace( edge, currentLoc );
         tooth.expandCrown( edge );
+        println( "****" );
       }
-      teeth.addAll( roots( tooth ) );
+      teeth.addTeeth( roots( tooth, currentLoc, edge ) );
     }
     return teeth;
   }
-  void printlocs( Location loc ) {
-    Set set = grid.keySet( );
-    Location l = null;
-    for ( Object o : set ) {
-      l = ( Location ) o;
-      println( l.equals( loc ) );
-    }
-    println ( "node: " + grid.get( l ) );
-  }
-    
   
-  Teeth roots( Tooth tooth ) {
+  //all possible root systems sans where just came from ( edge )
+  Teeth roots( Tooth tooth, Location loc, Edge edge ) {
+    edge = edge.inverse( );
     Teeth teeth = new Teeth( );
-    ArrayList< Edge > adjs = grid.get( current ).adjacents( );
+    ArrayList< Edge > adjs = grid.get( loc ).adjacents( );
     int size = adjs.size( );
     for ( int i = 0; i < size; ++i )
       for ( int j = i + 1; j < size; ++j ) {
         Tooth t = new Tooth( tooth );
-        t.forkRight( adjs.get( i ) );
-        t.forkLeft( adjs.get( j ) );
-        teeth.addTooth( t );
+        Edge right = adjs.get( i );
+        Edge left  = adjs.get( j );
+        if ( !right.equals( edge ) && !left.equals( edge ) ) {
+          t.forkRight( right );
+          t.forkLeft( left );
+          teeth.addTooth( t );
+          println( "tooth: " + t );
+        }
       }
     return teeth;
   }
@@ -114,10 +125,17 @@ class Location {
   
   Location( ) { }
   Location( int _x, int _y ) { x = _x; y = _y; }
-  
+  Location( Location l ) {
+    x = xloc( );
+    y = yloc( );
+  }
   
   final int xloc( ) { return x; }
   final int yloc( ) { return y; }
+  
+  Location trace ( Edge e ) {
+    return new Location( xloc( ) + e.x( ), yloc( ) + e.y( ) );
+  }
   
   public boolean equals( Object obj ){
     if ( obj == this ) return true;    
