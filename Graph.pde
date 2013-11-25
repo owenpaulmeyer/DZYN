@@ -37,16 +37,16 @@ class Graph {
     Node node = grid.get( loc );
     Teeth teeth = new Teeth( );
     Location currentLoc = null;
+    ArrayList< Edge > adjs = node.adjacents( );
     
-    for ( Edge edge : node.adjacents( ) ) {
+    for ( Edge edge : adjs ) {
       Tooth tooth = new Tooth( );
       
       //add the points to the tooth
-      for ( Edge e : node.adjacents( ) ) {
+      for ( Edge e : adjs ) {
         if ( e != edge ) {
           Point p = new Point( e );
           tooth.addPoint( p );
-          //println( "points: " + tooth.points( ) );
         } 
       }
       
@@ -59,7 +59,6 @@ class Graph {
         if ( node.degree( ) == 0 ) break;
         node = trace( edge, currentLoc );
         tooth.expandCrown( edge );
-        println( "****" );
       }
       teeth.addTeeth( roots( tooth, currentLoc, edge ) );
     }
@@ -81,7 +80,6 @@ class Graph {
           t.forkRight( right );
           t.forkLeft( left );
           teeth.addTooth( t );
-          println( "tooth: " + t );
         }
       }
     return teeth;

@@ -9,7 +9,7 @@ class Teeth extends ArrayList< Tooth > {
   }
   void addTeeth( Teeth teeth ) {
     for ( Tooth t : teeth )
-      addTooth( t );
+      this.addTooth( t );
   }
 }
 

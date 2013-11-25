@@ -8,7 +8,8 @@ class Tooth {
   Tooth ( ) { }
   
   Tooth ( Tooth t ) {
-
+    for ( Point p : t.points( ) )
+      points.add( p );
     for ( Edge e : t.crown ) {
       crown.add( e );
     }
