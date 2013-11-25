@@ -48,13 +48,26 @@ class GNode {
   private double weight = 1.0;
   private ArrayList< WeightedEdge > adjacents;
   
-  GNode (  ) { adjacents = new ArrayList< WeightedEdge >( ); }
+  GNode (  ) {
+    adjacents = new ArrayList< WeightedEdge >( );
+    addEdge( n );
+    addEdge( s );
+    addEdge( e );
+    addEdge( w );
+    addEdge( nw );
+    addEdge( ne );
+    addEdge( sw );
+    addEdge( se );
+  }
   
   GNode ( ArrayList< WeightedEdge > adj ) {
     adjacents = adj;
   }
   
-  void addAdj( WeightedEdge adj ) { adjacents.add( adj ); }
+  void addEdge( Edge e ) {
+    WeightedEdge edge = new WeightedEdge( e );
+    adjacents.add( edge );
+  }
   
   final double weight( ) { return weight; }
   final ArrayList< WeightedEdge > adjacents( ) { return adjacents; }

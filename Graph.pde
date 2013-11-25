@@ -1,6 +1,5 @@
 class Graph {
   private HashMap< Location, Node > grid;
-  private Location current = null;
   private int wide;
   private int high;
   Graph ( int x, int y ) {
@@ -9,20 +8,14 @@ class Graph {
     grid = new HashMap< Location, Node > ( );
   }
   
-  void current( Location l ) { current = l; }
   
   //first Node added sets the current to it's location for display testing purposes
   void addNode( int xloc, int yloc, Node n ) {
     Location l = new Location( xloc, yloc );
     grid.put( l, n );
-    if( current == null ) current ( l );
   }
 
-  Node trace( Edge e, Location loc ) {
-    loc.trace( e );
-    return grid.get( loc );
-  }
-  
+ 
   Teeth extract( ) {
     Teeth teeth = new Teeth( );
     Set set = grid.keySet( );
@@ -130,6 +123,9 @@ class Location {
     x = xloc( );
     y = yloc( );
   }
+  
+  void xloc( int _x ) { x = _x; }
+  void yloc( int _y ) { y = _y; }
   
   final int xloc( ) { return x; }
   final int yloc( ) { return y; }

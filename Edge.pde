@@ -80,6 +80,7 @@ class WeightedEdge extends Edge {
   void balanceWeight( Ratio r ) {
     weight.balance( r );
   }
+  final Edge direction( ) { return ( Edge ) this; }
 }
 
 
