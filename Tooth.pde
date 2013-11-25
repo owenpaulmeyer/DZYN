@@ -9,7 +9,7 @@ class Tooth {
   
   Tooth ( Tooth t ) {
     for ( Point p : t.points( ) )
-      points.add( p );
+      points.add( new Point( p.fst( ), p.snd( ) ) );
     for ( Edge e : t.crown ) {
       crown.add( e );
     }
@@ -43,7 +43,10 @@ class Tooth {
     if ( points.contains( p ) ) {
       points.get( points.indexOf( p ) ).incrementCount( );
     }
-    else points.add( p );
+    else {
+      Point p2 = new Point( p.fst( ) );
+      points.add( p2 );
+    }
   }
   
   void addPoints( Points ps ) {

@@ -78,9 +78,21 @@ void setup ( ) {
   Graph design = testInput( );
   design.display( 20, 30, 30 );
   
-  Teeth teeth = design.aldente( new Location( 2, 0 ) );
-  
+  Teeth teeth = design.extract( );
   println( teeth );
+  /*
+  Teeth teeth2 = design.aldente( new Location ( 1, 4 ) );
+  println( "2: " + teeth2.size( ) + teeth2 );
+  Tooth th = new Tooth( );
+  th.addPoint( nw );
+  th.addPoint( se );
+  th.addPoint( w );
+  th.expandCrown( n );
+  th.forkRight( sw );
+  th.forkLeft( ne );
+  teeth2.addTooth( th );
+  println( "2: " + teeth2.size( ) + teeth2 );
+  */
 
 
 }

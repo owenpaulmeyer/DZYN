@@ -44,7 +44,7 @@ class Graph {
       
       //add the points to the tooth
       for ( Edge e : adjs ) {
-        if ( e != edge ) {
+        if ( !e.equals( edge ) ) {
           Point p = new Point( e );
           tooth.addPoint( p );
         } 
