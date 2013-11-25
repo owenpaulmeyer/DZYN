@@ -18,6 +18,7 @@ class Node {
   
   final ArrayList< Edge > adjacents( ) { return adjacents; }
   final int degree   ( ) { return adjacents.size( ); }
+  
   //for assisting graph inputting
   Node nodeReflectX( ) {
     ArrayList< Edge > adj = new ArrayList< Edge >( );
@@ -33,6 +34,12 @@ class Node {
       adj.add( reflectY( e ) );
     }
     return new Node( adj );
+  }
+  
+  String toString( ) {
+    String s = "";
+    for ( Edge e : adjacents ) s += " " + e;
+    return s;
   }
 }
 

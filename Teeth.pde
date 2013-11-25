@@ -7,5 +7,9 @@ class Teeth extends ArrayList< Tooth > {
     }
     else add( tooth );
   }
+  void addTeeth( Teeth teeth ) {
+    for ( Tooth t : teeth )
+      addTooth( t );
+  }
 }
 
