@@ -17,6 +17,7 @@
     return new Edge( edge.x( ) * -1, edge.y( ) );
   }
   
+  
 Graph testInput( ) {
   Graph design = new Graph( 2, 2 );
   Node n1 = new Node( );
