@@ -102,14 +102,14 @@ class GNode {
   
   String toString( ) {
     String s = "";
-    s += "  North: " + north + "\n";
-    s += "  South: " + south + "\n";
-    s += "  West:  " + west + "\n";
-    s += "  East:  " + east + "\n";
-    s += "  NorthWest:  " + northwest + "\n";
-    s += "  NorthEast:  " + northeast + "\n";
-    s += "  SouthWest:  " + southwest + "\n";
-    s += "  SouthEast:  " + southeast + "\n";
+    s += "  N:   " + north + "\n";
+    s += "  S:   " + south + "\n";
+    s += "  W:   " + west + "\n";
+    s += "  E:   " + east + "\n";
+    s += "  NW:  " + northwest + "\n";
+    s += "  NE:  " + northeast + "\n";
+    s += "  SW:  " + southwest + "\n";
+    s += "  SE:  " + southeast + "\n";
     return s;
   }
 }

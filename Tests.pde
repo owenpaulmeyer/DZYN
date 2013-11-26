@@ -98,6 +98,21 @@ void setup ( ) {
 */
 
   GGraph graph = new GGraph ( 3, 3 );
+  
+  Ratio weight = new Ratio( 1, 1 );
+  
+  GNode seed = new GNode( );
+  
+  seed.balance( new WeightedEdge( n, weight ) );
+  seed.balance( new WeightedEdge( s, weight ) );
+  seed.balance( new WeightedEdge( w, weight ) );
+  seed.balance( new WeightedEdge( e, weight ) );
+  seed.balance( new WeightedEdge( nw, weight ) );
+  seed.balance( new WeightedEdge( ne, weight ) );
+  seed.balance( new WeightedEdge( sw, weight ) );
+  seed.balance( new WeightedEdge( se, weight ) );
+  
+  graph.setSeed( seed, new Location( 1, 1 ) );
   println( graph );
 
 }
