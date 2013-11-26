@@ -144,7 +144,7 @@ class Location {
   public int hashCode( ) { return x * 10 + y; }
   
   String toString( ) {
-    String s = "( " + x + ", " + y + " )";
+    String s = "( " + x + ", " + y + " )\n";
     return s;
   }
 

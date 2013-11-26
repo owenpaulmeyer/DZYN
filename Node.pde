@@ -99,7 +99,19 @@ class GNode {
   void openState ( ) { state = State.Open; }
   
   final double nodeWeight( ) { return weight; }
-
+  
+  String toString( ) {
+    String s = "";
+    s += "  North: " + north + "\n";
+    s += "  South: " + south + "\n";
+    s += "  West:  " + west + "\n";
+    s += "  East:  " + east + "\n";
+    s += "  NorthWest:  " + northwest + "\n";
+    s += "  NorthEast:  " + northeast + "\n";
+    s += "  SouthWest:  " + southwest + "\n";
+    s += "  SouthEast:  " + southeast + "\n";
+    return s;
+  }
 }
 
 

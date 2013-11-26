@@ -87,6 +87,13 @@ class WeightedEdge extends Edge {
   }
   final Ratio weight( )   { return weight; }
   final Edge direction( ) { return ( Edge ) this; }
+  
+  String toString( ) {
+    String s = "( ";
+    s += super.toString( ) + ", ";
+    s += weight.toString( ) + " )";
+    return s;
+  }
 }
 
 
