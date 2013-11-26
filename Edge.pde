@@ -76,11 +76,16 @@ class WeightedEdge extends Edge {
   Ratio weight = new Ratio ( 0, 0 );
   
   WeightedEdge( Edge e ) { super( e.x( ), e.y( ) ); }
+
+  WeightedEdge( Edge e, Ratio w ) {
+    super( e.x( ), e.y( ) );
+    weight = w;
+  }
   
   void balance( WeightedEdge edge ) {
     weight.balance( edge.weight( ) );
   }
-  final Ratio weight( ) { return weight; }
+  final Ratio weight( )   { return weight; }
   final Edge direction( ) { return ( Edge ) this; }
 }
 
