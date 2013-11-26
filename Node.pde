@@ -43,8 +43,6 @@ class Node {
   }
 }
 
-
-
 class GNode {
   //NodeWeight usage is unknown at this point
   private double weight = 1.0;
