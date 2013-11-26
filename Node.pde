@@ -47,32 +47,44 @@ class GNode {
   //NodeWeight usage is unknown at this point
   private double weight = 1.0;
   private State state = State.Open;
-  private WeightedEdge north     = new WeightedEdge( n );
-  private WeightedEdge south     = new WeightedEdge( s );
-  private WeightedEdge east      = new WeightedEdge( e );
-  private WeightedEdge west      = new WeightedEdge( w );
-  private WeightedEdge northeast = new WeightedEdge( ne );
-  private WeightedEdge northwest = new WeightedEdge( nw );
-  private WeightedEdge southeast = new WeightedEdge( se );
-  private WeightedEdge southwest = new WeightedEdge( sw );
+  private Ratio north     = new Ratio( 0, 0 );
+  private Ratio south     = new Ratio( 0, 0 );
+  private Ratio east      = new Ratio( 0, 0 );
+  private Ratio west      = new Ratio( 0, 0 );
+  private Ratio northeast = new Ratio( 0, 0 );
+  private Ratio northwest = new Ratio( 0, 0 );
+  private Ratio southeast = new Ratio( 0, 0 );
+  private Ratio southwest = new Ratio( 0, 0 );
 
-  GNode (  ) { }
+  
 
   void balance ( GNode node ) {
-    north.balance( node.north );
-    south.balance( node.south );
-    east.balance ( node.east  );
-    west.balance ( node.west  );
+    north.balance    ( node.north     );
+    south.balance    ( node.south     );
+    east.balance     ( node.east      );
+    west.balance     ( node.west      );
     northeast.balance( node.northeast );
     northwest.balance( node.northwest );
     southeast.balance( node.southeast );
     southwest.balance( node.southwest );
   }
   
+  Ratio weight( Edge e ) {
+    if(      e.isNorth()  ) return north;
+    else if( e.isSouth()  ) return south;
+    else if( e.isWest()   ) return west;
+    else if( e.isEast()   ) return east;
+    else if( e.isNorthW() ) return northwest;
+    else if( e.isNorthE() ) return northeast;
+    else if( e.isSouthW() ) return southwest;
+    else if( e.isSouthE() ) return southeast;
+    else return new Ratio( 0, 0 );
+  }
+  
   void closeState( ) { state = State.Closed; }
   void openState ( ) { state = State.Open; }
   
-  final double weight( ) { return weight; }
+  final double nodeWeight( ) { return weight; }
 
 }
 

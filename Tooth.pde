@@ -44,7 +44,7 @@ class Tooth {
       points.get( points.indexOf( p ) ).incrementCount( );
     }
     else {
-      Point p2 = new Point( p.fst( ) );
+      Point p2 = new Point( p.edge( ) );
       points.add( p2 );
     }
   }
@@ -54,6 +54,10 @@ class Tooth {
   }
   
   void incrementCount( ) { ++count; }
+  
+  Ratio pointWeight( Point p ) {
+    return new Ratio ( p.count( ), count( ) );
+  }
   
   final Line crown   ( ) { return crown; }
   final Fork root    ( ) { return root; }
