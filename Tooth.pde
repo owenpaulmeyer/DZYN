@@ -58,6 +58,7 @@ class Tooth {
   Ratio pointWeight( Point p ) {
     return new Ratio ( p.count( ), count( ) );
   }
+
   
   final Line crown   ( ) { return crown; }
   final Fork root    ( ) { return root; }

@@ -55,6 +55,9 @@ class Fork extends Pair< Edge, Edge > {
     else return false;
   }
   
+  Edge right( ) { return fst( ); }
+  Edge left( )  { return snd( ); }
+  
   JSONObject toJSON( ) {
     JSONObject jsn = new JSONObject( );
     jsn.setJSONObject( "right", fst( ).toJSON( ) );
