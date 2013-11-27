@@ -124,9 +124,11 @@ void setup ( ) {
   th.forkLeft( w );
   //println( "trace: " + graph.trace( new Location ( 0, 0 ), n ) );
   GNode gnode = new GNode( );
-  gnode = graph.setTeeth( teeth, new Location ( 3, 1 ) );
-  println( "gnode: " + gnode );
-  //println( graph );
+  Pair < GNode, Location > pair = graph.bufferTeeth( teeth, new Location ( 3, 1 ) );
+  gnode = pair.fst( );
+  graph.setBuffer( pair );
+  //println( "gnode: " + gnode );
+  println( graph );
 
 }
 

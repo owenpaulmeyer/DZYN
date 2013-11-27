@@ -69,7 +69,7 @@ class GNode {
     southeast = gn.southeast;
     southwest = gn.southwest;
   }
-  /*
+  
   //balances by the GNode
   void balance ( GNode node ) {
     north.balance    ( node.north     );
@@ -81,7 +81,7 @@ class GNode {
     southeast.balance( node.southeast );
     southwest.balance( node.southwest );
   }
-  */
+  
   
   //balances by the WeightedEdge
   void balance ( WeightedEdge edge, double scale ) {

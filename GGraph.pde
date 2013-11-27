@@ -55,18 +55,24 @@ class GGraph {
       opNode.balance ( new WeightedEdge( opEdge, edge.weight( ) ), 1.0 ); 
     } 
   }
-
-
   
-  GNode setTeeth( Teeth teeth, Location loc ) {
+  void setBuffer( Pair < GNode, Location > pair ) {
+    GNode node = grid.get( pair.snd( ) );
+    node.balance( pair.fst( ) );
+  }
+  
+  Pair< GNode, Location > bufferTeeth( Teeth teeth, Location loc ) {
     GNode node = new GNode( );
     for ( Tooth tooth : teeth )
       node = setTooth( tooth, loc, node );
-    return node;
+    return new Pair< GNode, Location > ( node, loc );
   }
-  
+
+  //point setting must be separated into the two for loops so that 
+  //empty points get the ratio denominator factored in as well as
+  //the not empty points (which would be the case in combining the
+  //two for loops.
   GNode setTooth( Tooth tooth, Location loc, GNode n ) {
-    double zero = 0;
     GNode node = new GNode( n );
     double scale = fitTooth( tooth, loc );
     ArrayList< Point > points = tooth.points( );
@@ -74,15 +80,18 @@ class GGraph {
       WeightedEdge we = new WeightedEdge( p.edge( ), tooth.pointWeight( p ) );
       node.balance( we, scale );
     }
-    for ( Edge edge : directions( ) ) {
+    Edge from = tooth.crown( ).get( 0 );
+    ArrayList< Edge > directions = directions( );
+    directions.remove( from );  //can't balance the direction the tooth 'looks'
+    for ( Edge edge : directions ) {
       WeightedEdge we = new WeightedEdge( edge , tooth.toothWeight( ) );
       node.balance( we, scale );
     }
-    if ( scale != 0 ) {
-    println( "Scalar: " + scale );
-    println( "TOOTH: " + tooth );
-    println( "GNODE: " + node );
-    }
+    //if ( scale != 0 ) {
+    //println( "Scalar: " + scale );
+    //println( "TOOTH: " + tooth );
+    //println( "GNODE: " + node );
+    //}
     return node;
   }
 
@@ -96,9 +105,9 @@ class GGraph {
       weight *= w1 * w2;
       loc = trace( loc, edge );
       currentNode = grid.get( loc );
-      println( "current node: " + currentNode );
-      println( "edge: " + edge );
-      println( "weight: " + weight );
+      //println( "current node: " + currentNode );
+      //println( "edge: " + edge );
+      //println( "weight: " + weight );
     }
     double left =  currentNode.edgeWeight( tooth.root( ).left( )  ).eval( );
     double right = currentNode.edgeWeight( tooth.root( ).right( ) ).eval( );
