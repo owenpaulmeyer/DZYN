@@ -48,26 +48,42 @@ class GGraph {
   void setSeed ( Seed seed, Location loc ) {
     GNode node = grid.get( loc );
     for ( WeightedEdge edge : seed ) {
-      node.balance( edge );
+      node.balance( edge, 1.0 );
       Location l = trace( loc, edge );
       GNode opNode = grid.get( l );
       Edge opEdge  = edge.inverse( );
-      opNode.balance ( new WeightedEdge( opEdge, edge.weight( ) ) ); 
+      opNode.balance ( new WeightedEdge( opEdge, edge.weight( ) ), 1.0 ); 
     } 
   }
 
-  void setTooth( Tooth tooth, Location loc ) {
-    double scale = fitTooth( tooth, loc );
-    println( "ITEM: " + scale );
+
+  
+  GNode setTeeth( Teeth teeth, Location loc ) {
+    GNode node = new GNode( );
+    for ( Tooth tooth : teeth )
+      node = setTooth( tooth, loc, node );
+    return node;
   }
   
-  void setPoints( Tooth tooth, Location loc ) {
-    GNode node = grid.get( loc );
+  GNode setTooth( Tooth tooth, Location loc, GNode n ) {
+    double zero = 0;
+    GNode node = new GNode( n );
+    double scale = fitTooth( tooth, loc );
     ArrayList< Point > points = tooth.points( );
     for ( Point p : points ) {
       WeightedEdge we = new WeightedEdge( p.edge( ), tooth.pointWeight( p ) );
-      node.balance( we );
+      node.balance( we, scale );
     }
+    for ( Edge edge : directions( ) ) {
+      WeightedEdge we = new WeightedEdge( edge , tooth.toothWeight( ) );
+      node.balance( we, scale );
+    }
+    if ( scale != 0 ) {
+    println( "Scalar: " + scale );
+    println( "TOOTH: " + tooth );
+    println( "GNODE: " + node );
+    }
+    return node;
   }
 
   double fitTooth( Tooth tooth, Location loc ) {
