@@ -38,10 +38,10 @@ class GGraph {
   
   Location trace ( Location loc, Edge e ) {
     Location l = loc.trace( e );
-    if ( loc.xloc( ) < 0 ) loc.xloc( wide-1 );
-    if ( loc.xloc( ) == wide ) loc.xloc( 0 );
-    if ( loc.yloc( ) < 0 ) loc.yloc( high-1 );
-    if ( loc.yloc( ) == high ) loc.yloc( 0 );
+    if ( l.xloc( ) < 0 ) l.xloc( wide-1 );
+    if ( l.xloc( ) == wide ) l.xloc( 0 );
+    if ( l.yloc( ) < 0 ) l.yloc( high-1 );
+    if ( l.yloc( ) == high ) l.yloc( 0 );
     return l;
   } 
 

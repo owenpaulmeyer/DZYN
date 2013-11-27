@@ -113,7 +113,16 @@ void setup ( ) {
   seed.add( new WeightedEdge( se, weight ) );
   
   graph.setSeed( seed, new Location( 1, 1 ) );
-
+  
+  Tooth th = new Tooth( );
+  th.addPoint( nw );
+  th.addPoint( se );
+  th.addPoint( w );
+  th.expandCrown( n );
+  th.forkRight( sw );
+  th.forkLeft( ne );
+  //println( "trace: " + graph.trace( new Location ( 0, 0 ), n ) );
+  graph.setTooth( th, new Location ( 0, 0 ) );
   println( graph );
 
 }
