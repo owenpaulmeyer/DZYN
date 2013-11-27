@@ -114,5 +114,8 @@ class GNode {
   }
 }
 
+class Seed extends ArrayList< WeightedEdge >{
+}
+
 
   

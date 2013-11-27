@@ -7,6 +7,19 @@
   final Edge sw = new Edge(-1, 1);
   final Edge se = new Edge(1, 1);
   
+  final ArrayList< Edge > directions( ) {
+    ArrayList< Edge > directions = new ArrayList< Edge >( );
+    directions.add( n );
+    directions.add( s );
+    directions.add( w );
+    directions.add( e );
+    directions.add( nw );
+    directions.add( ne );
+    directions.add( sw );
+    directions.add( se );
+    return directions;
+  }
+
   //reflection is for helping to input graphs
   //Edge reflection is helper for nodeReflection
   final Edge reflectY( Edge edge ) {

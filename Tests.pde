@@ -101,18 +101,19 @@ void setup ( ) {
   
   Ratio weight = new Ratio( 1, 1 );
   
-  GNode seed = new GNode( );
+  Seed seed = new Seed( );
   
-  seed.balance( new WeightedEdge( n, weight ) );
-  seed.balance( new WeightedEdge( s, weight ) );
-  seed.balance( new WeightedEdge( w, weight ) );
-  seed.balance( new WeightedEdge( e, weight ) );
-  seed.balance( new WeightedEdge( nw, weight ) );
-  seed.balance( new WeightedEdge( ne, weight ) );
-  seed.balance( new WeightedEdge( sw, weight ) );
-  seed.balance( new WeightedEdge( se, weight ) );
+  seed.add( new WeightedEdge( n, weight ) );
+  seed.add( new WeightedEdge( s, weight ) );
+  seed.add( new WeightedEdge( w, weight ) );
+  seed.add( new WeightedEdge( e, weight ) );
+  seed.add( new WeightedEdge( nw, weight ) );
+  seed.add( new WeightedEdge( ne, weight ) );
+  seed.add( new WeightedEdge( sw, weight ) );
+  seed.add( new WeightedEdge( se, weight ) );
   
   graph.setSeed( seed, new Location( 1, 1 ) );
+
   println( graph );
 
 }
