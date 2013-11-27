@@ -56,8 +56,10 @@ class Tooth {
   void incrementCount( ) { ++count; }
   
   Ratio pointWeight( Point p ) {
-    return new Ratio ( p.count( ), count( ) );
+    return new Ratio ( p.count( ), 0 );
   }
+  
+  Ratio toothWeight( ) { return new Ratio ( 0, count( ) ); }
 
   
   final Line crown   ( ) { return crown; }

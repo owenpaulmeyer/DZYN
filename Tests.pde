@@ -97,8 +97,9 @@ void setup ( ) {
   println( "2: " + teeth2.size( ) + teeth2 );
 */
 
-  GGraph graph = new GGraph ( 3, 3 );
-  
+  GGraph graph = new GGraph ( 5, 5 );
+  Graph input = testInput( );
+  Teeth teeth = input.extract( );
   Ratio weight = new Ratio( 1, 1 );
   
   Seed seed = new Seed( );
@@ -112,7 +113,7 @@ void setup ( ) {
   seed.add( new WeightedEdge( sw, weight ) );
   seed.add( new WeightedEdge( se, weight ) );
   
-  graph.setSeed( seed, new Location( 1, 1 ) );
+  graph.setSeed( seed, new Location( 2, 2 ) );
   
   Tooth th = new Tooth( );
   th.addPoint( nw );
@@ -122,7 +123,9 @@ void setup ( ) {
   th.forkRight( e );
   th.forkLeft( w );
   //println( "trace: " + graph.trace( new Location ( 0, 0 ), n ) );
-  graph.setTooth( th, new Location ( 1, 2 ) );
+  GNode gnode = new GNode( );
+  gnode = graph.setTeeth( teeth, new Location ( 3, 1 ) );
+  println( "gnode: " + gnode );
   //println( graph );
 
 }

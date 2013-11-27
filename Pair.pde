@@ -34,6 +34,11 @@ class Ratio {
     num += r.numerator( );
     den += r.denominator( );
   }
+  
+  void scaleRatio( double scale ) {
+    num *= scale;
+    den *= scale;
+  }
 
   double eval( ) {
     if ( den == 0 ) return 0;

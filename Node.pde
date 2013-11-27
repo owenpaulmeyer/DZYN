@@ -56,7 +56,20 @@ class GNode {
   private Ratio southeast = new Ratio( 0, 0 );
   private Ratio southwest = new Ratio( 0, 0 );
 
-  
+  GNode( ) { }
+
+  GNode( GNode gn ) {
+    weight = gn.weight;
+    north  = gn.north;
+    south  = gn.south;
+    east   = gn.east;
+    west   = gn.west;
+    northeast = gn.northeast;
+    northwest = gn.northwest;
+    southeast = gn.southeast;
+    southwest = gn.southwest;
+  }
+  /*
   //balances by the GNode
   void balance ( GNode node ) {
     north.balance    ( node.north     );
@@ -68,11 +81,13 @@ class GNode {
     southeast.balance( node.southeast );
     southwest.balance( node.southwest );
   }
+  */
   
   //balances by the WeightedEdge
-  void balance ( WeightedEdge edge ) {
+  void balance ( WeightedEdge edge, double scale ) {
     Edge e = edge.direction( );
     Ratio w = edge.weight( );
+    w.scaleRatio( scale );
     if     ( e.isNorth()  ) north.balance( w );
     else if( e.isSouth()  ) south.balance( w );
     else if( e.isWest()   ) west.balance( w );
