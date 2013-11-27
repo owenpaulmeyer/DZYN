@@ -69,20 +69,7 @@ class GNode {
     southeast = gn.southeast;
     southwest = gn.southwest;
   }
-  
-  //balances by the GNode
-  void balance ( GNode node ) {
-    north.balance    ( node.north     );
-    south.balance    ( node.south     );
-    east.balance     ( node.east      );
-    west.balance     ( node.west      );
-    northeast.balance( node.northeast );
-    northwest.balance( node.northwest );
-    southeast.balance( node.southeast );
-    southwest.balance( node.southwest );
-  }
-  
-  
+
   //balances by the WeightedEdge
   void balance ( WeightedEdge edge, double scale ) {
     Edge e = edge.direction( );
@@ -96,10 +83,8 @@ class GNode {
     else if( e.isNorthE() ) northeast.balance( w );
     else if( e.isSouthW() ) southwest.balance( w );
     else if( e.isSouthE() ) southeast.balance( w );
-  }
-  
+  } 
 
-  
   Ratio edgeWeight( Edge e ) {
     if     ( e.isNorth()  ) return north;
     else if( e.isSouth()  ) return south;
@@ -111,7 +96,6 @@ class GNode {
     else if( e.isSouthE() ) return southeast;
     else return new Ratio( 0, 0 );
   }
-  
 
   void closeState( ) { state = State.Closed; }
   void openState ( ) { state = State.Open; }
@@ -146,8 +130,7 @@ class Setting extends ArrayList< WeightedEdge > {
       add( new WeightedEdge( e, new Ratio( 0, 0 ) ) );
     }
   }
-  
-  
+
   void balance ( WeightedEdge edge, double scale ) {
     Edge e = edge.direction( ); //balance Setting @ e...
     Ratio w = edge.weight( );
@@ -156,14 +139,6 @@ class Setting extends ArrayList< WeightedEdge > {
     WeightedEdge we = get( idx );
     we.balance( w );
   }
-  
-  /*
-  void balance ( WeightedEdge edge ) {
-    int idx = indexOf( edge );
-    WeightedEdge e = get( idx );
-    e.balance( edge );
-  }
-  */
 }
 
   

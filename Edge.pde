@@ -82,12 +82,6 @@ class WeightedEdge extends Edge {
     weight = w;
   }
   
-  /*
-  void balance( WeightedEdge edge ) {
-    weight.balance( edge.weight( ) );
-  }
-  */
-  
   void balance( Ratio scaledRatio ) {
     weight.balance( scaledRatio );
   }

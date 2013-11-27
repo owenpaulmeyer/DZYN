@@ -20,7 +20,8 @@ class GGraph {
     Location l = new Location( xloc, yloc );
     grid.put( l, n );
   }
-  
+
+  //all locations start out with empty ratios
   void initialize( ) {
     for ( int x = 0; x < wide; ++x )
       for ( int y = 0; y < high; ++y ) {
@@ -34,8 +35,9 @@ class GGraph {
     GNode next = grid.get( l );
     return next.edgeWeight( edge.inverse( ) );
   }
-  
-  
+
+  //moves about the toroidal grid
+  //Location::trace returns a new location
   Location trace ( Location loc, Edge e ) {
     Location l = loc.trace( e );
     if ( l.xloc( ) < 0 ) l.xloc( wide-1 );
@@ -45,6 +47,7 @@ class GGraph {
     return l;
   } 
 
+  //genesis
   void setSeed ( Seed seed, Location loc ) {
     GNode node = grid.get( loc );
     for ( WeightedEdge edge : seed ) {
@@ -55,39 +58,26 @@ class GGraph {
       opNode.balance ( new WeightedEdge( opEdge, edge.weight( ) ), 1.0 ); 
     } 
   }
-  
+
+  //balances a valalnce into the grid
+  void setBuffer( Pair < Setting, Location > pair ) {
+    setSetting( pair.fst( ), pair.snd( ) );
+  }
+
+  //used by setBuffer
   void setSetting ( Setting set, Location loc ) {
     GNode node = grid.get( loc );
     for ( WeightedEdge edge : set ) {
       node.balance( edge, 1.0 );
       Location l = trace( loc, edge );
-      GNode opNode = grid.get( l );
-      Edge opEdge  = edge.inverse( );
-      opNode.balance ( new WeightedEdge( opEdge, edge.weight( ) ), 1.0 ); 
+      GNode oppositeNode = grid.get( l );
+      Edge oppositeEdge  = edge.inverse( );
+      oppositeNode.balance ( new WeightedEdge( oppositeEdge, edge.weight( ) ), 1.0 ); 
     } 
   }
-  /*
-  void setBuffer( Pair < GNode, Location > pair ) {
-    GNode node = grid.get( pair.snd( ) );
-    node.balance( pair.fst( ) );
-  }
-  */
-  
-  void setBuffer( Pair < Setting, Location > pair ) {
-    setSetting( pair.fst( ), pair.snd( ) );
 
-  }
-  
-  /*
-  Pair< GNode, Location > bufferTeeth( Teeth teeth, Location loc ) {
-    GNode node = new GNode( );
-    for ( Tooth tooth : teeth )
-      node = setTooth( tooth, loc, node );
-    return new Pair< GNode, Location > ( node, loc );
-  }
-  */
-  
-  
+  //for setting aside the results of setting a set of teeth per location
+  //to be balanced into the grid on a per valence schedule
   Pair< Setting, Location > bufferTeeth( Teeth teeth, Location loc ) {
     Setting set = new Setting( );
     for ( Tooth tooth : teeth )
@@ -95,35 +85,12 @@ class GGraph {
     return new Pair< Setting, Location > ( set, loc );
   }
 
-  //point setting must be separated into the two for loops so that 
-  //empty points get the ratio denominator factored in as well as
-  //the not empty points (which would be the case in combining the
-  //two for loops.
-  GNode setTooth( Tooth tooth, Location loc, GNode n ) {
-    GNode node = new GNode( n );
-    double scale = fitTooth( tooth, loc );
-    ArrayList< Point > points = tooth.points( );
-    for ( Point p : points ) {
-      WeightedEdge we = new WeightedEdge( p.edge( ), tooth.pointWeight( p ) ); //pointWeight isA Ratio ( x / 0 )
-      node.balance( we, scale ); //balance 'node' @ 'we', scaled as such
-    }
-    Edge from = tooth.crown( ).get( 0 );
-    ArrayList< Edge > directions = directions( );
-    directions.remove( from );  //can't balance the direction the tooth 'looks'
-    for ( Edge edge : directions ) {
-      WeightedEdge we = new WeightedEdge( edge , tooth.toothWeight( ) ); //toothWeight isA Ratio ( 0 / x )
-      node.balance( we, scale ); //balance 'node' @ 'we', scaled as such
-    }
-    //if ( scale != 0 ) {
-    //if ( loc.equals( new Location( 0, 1 ) ) ){
-    //println( "location: " + loc );
-    //println( "Scalar: " + scale );
-    //println( "TOOTH: " + tooth );
-    //println( "GNODE: " + node );
-    //}
-    return node;
-  }
-
+  //produces a set of weighted edges corresponding to the scaled 
+  //Ratios of the points of the fitted tooth
+    //point setting must be separated into the two for loops so that 
+    //empty points get the ratio denominator factored in as well as
+    //the not empty points (which would be the case in combining the
+    //two for loops.
   Setting setTooth( Tooth tooth, Location loc, Setting set ) {
     double scale = fitTooth( tooth, loc );
     ArrayList< Point > points = tooth.points( );
@@ -148,6 +115,7 @@ class GGraph {
     return set;
   }
   
+  //determines the weight of tooth's fit @ loc
   double fitTooth( Tooth tooth, Location loc ) {
     double weight = 1.0;
     GNode currentNode = grid.get( loc );
@@ -184,6 +152,8 @@ class GGraph {
   }
 
   void display( int scale, int xS, int yS ){
+    float sW = .09 * scale;
+    strokeWeight( sW );
     Set set = grid.keySet( );
     for ( Object o : set ) {
       Location l = ( Location ) o;
@@ -191,16 +161,19 @@ class GGraph {
       float _x = xS + l.xloc( ) * scale;
       float _y = yS + l.yloc( ) * scale;
       for ( Edge e : directions( ) ) {
-        float _xto = _x + e.x( )*scale/2.05;
-        float _yto = _y + e.y( )*scale/2.05;
+        float _xto = _x + e.x( )*scale/2;
+        float _yto = _y + e.y( )*scale/2;
         double weight = n.edgeWeight( e ).eval( );
         int alpha = (int)(255 * weight);
         stroke( 0, 0, 0, alpha );
         line( _x, _y, _xto, _yto  );
       }
-      //strokeWeight( 1 );
-      //ellipse( _x, _y, 8,8 );
-      //strokeWeight( 4 );
+      /*
+      strokeWeight( 1.5 );
+      stroke( 0, 0 , 0 );
+      ellipse( _x, _y, .2 * scale, .2 * scale );
+      strokeWeight( sW );
+      */
     }
   }
   
