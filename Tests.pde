@@ -119,11 +119,11 @@ void setup ( ) {
   th.addPoint( se );
   th.addPoint( w );
   th.expandCrown( n );
-  th.forkRight( sw );
-  th.forkLeft( ne );
+  th.forkRight( e );
+  th.forkLeft( w );
   //println( "trace: " + graph.trace( new Location ( 0, 0 ), n ) );
-  graph.setTooth( th, new Location ( 0, 0 ) );
-  println( graph );
+  graph.setTooth( th, new Location ( 1, 2 ) );
+  //println( graph );
 
 }
 

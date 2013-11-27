@@ -32,7 +32,7 @@ class GGraph {
   Ratio returnWeight( Location loc, Edge edge ) {
     Location l = trace( loc, edge );
     GNode next = grid.get( l );
-    return next.weight( edge.inverse( ) );
+    return next.edgeWeight( edge.inverse( ) );
   }
   
   
@@ -58,7 +58,7 @@ class GGraph {
 
   void setTooth( Tooth tooth, Location loc ) {
     double scale = fitTooth( tooth, loc );
-    
+    println( "ITEM: " + scale );
   }
   
   void setPoints( Tooth tooth, Location loc ) {
@@ -75,12 +75,17 @@ class GGraph {
     GNode currentNode = grid.get( loc );
     for ( int i = 0; i < tooth.crown( ).size( ); ++i ) {
       Edge edge = tooth.crown( ).get( i );
-      double w1 = currentNode.weight( edge ).eval( );
+      double w1 = currentNode.edgeWeight( edge ).eval( );
       double w2 = returnWeight( loc, edge ).eval( );
       weight *= w1 * w2;
+      loc = trace( loc, edge );
+      currentNode = grid.get( loc );
+      println( "current node: " + currentNode );
+      println( "edge: " + edge );
+      println( "weight: " + weight );
     }
-    double left =  currentNode.weight( tooth.root( ).left( )  ).eval( );
-    double right = currentNode.weight( tooth.root( ).right( ) ).eval( );
+    double left =  currentNode.edgeWeight( tooth.root( ).left( )  ).eval( );
+    double right = currentNode.edgeWeight( tooth.root( ).right( ) ).eval( );
     return weight * left * right;
   }
 

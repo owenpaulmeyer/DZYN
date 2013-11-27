@@ -83,7 +83,7 @@ class GNode {
     else if( e.isSouthE() ) southeast.balance( w );
   }
   
-  Ratio weight( Edge e ) {
+  Ratio edgeWeight( Edge e ) {
     if     ( e.isNorth()  ) return north;
     else if( e.isSouth()  ) return south;
     else if( e.isWest()   ) return west;
@@ -101,7 +101,7 @@ class GNode {
   final double nodeWeight( ) { return weight; }
   
   String toString( ) {
-    String s = "";
+    String s = "\n";
     s += "  N:   " + north + "\n";
     s += "  S:   " + south + "\n";
     s += "  W:   " + west + "\n";
