@@ -56,16 +56,43 @@ class GGraph {
     } 
   }
   
+  void setSetting ( Setting set, Location loc ) {
+    GNode node = grid.get( loc );
+    for ( WeightedEdge edge : set ) {
+      node.balance( edge, 1.0 );
+      Location l = trace( loc, edge );
+      GNode opNode = grid.get( l );
+      Edge opEdge  = edge.inverse( );
+      opNode.balance ( new WeightedEdge( opEdge, edge.weight( ) ), 1.0 ); 
+    } 
+  }
+  /*
   void setBuffer( Pair < GNode, Location > pair ) {
     GNode node = grid.get( pair.snd( ) );
     node.balance( pair.fst( ) );
   }
+  */
   
+  void setBuffer( Pair < Setting, Location > pair ) {
+    setSetting( pair.fst( ), pair.snd( ) );
+
+  }
+  
+  /*
   Pair< GNode, Location > bufferTeeth( Teeth teeth, Location loc ) {
     GNode node = new GNode( );
     for ( Tooth tooth : teeth )
       node = setTooth( tooth, loc, node );
     return new Pair< GNode, Location > ( node, loc );
+  }
+  */
+  
+  
+  Pair< Setting, Location > bufferTeeth( Teeth teeth, Location loc ) {
+    Setting set = new Setting( );
+    for ( Tooth tooth : teeth )
+      set = setTooth( tooth, loc, set );
+    return new Pair< Setting, Location > ( set, loc );
   }
 
   //point setting must be separated into the two for loops so that 
@@ -77,17 +104,19 @@ class GGraph {
     double scale = fitTooth( tooth, loc );
     ArrayList< Point > points = tooth.points( );
     for ( Point p : points ) {
-      WeightedEdge we = new WeightedEdge( p.edge( ), tooth.pointWeight( p ) );
-      node.balance( we, scale );
+      WeightedEdge we = new WeightedEdge( p.edge( ), tooth.pointWeight( p ) ); //pointWeight isA Ratio ( x / 0 )
+      node.balance( we, scale ); //balance 'node' @ 'we', scaled as such
     }
     Edge from = tooth.crown( ).get( 0 );
     ArrayList< Edge > directions = directions( );
     directions.remove( from );  //can't balance the direction the tooth 'looks'
     for ( Edge edge : directions ) {
-      WeightedEdge we = new WeightedEdge( edge , tooth.toothWeight( ) );
-      node.balance( we, scale );
+      WeightedEdge we = new WeightedEdge( edge , tooth.toothWeight( ) ); //toothWeight isA Ratio ( 0 / x )
+      node.balance( we, scale ); //balance 'node' @ 'we', scaled as such
     }
     //if ( scale != 0 ) {
+    //if ( loc.equals( new Location( 0, 1 ) ) ){
+    //println( "location: " + loc );
     //println( "Scalar: " + scale );
     //println( "TOOTH: " + tooth );
     //println( "GNODE: " + node );
@@ -95,6 +124,30 @@ class GGraph {
     return node;
   }
 
+  Setting setTooth( Tooth tooth, Location loc, Setting set ) {
+    double scale = fitTooth( tooth, loc );
+    ArrayList< Point > points = tooth.points( );
+    for ( Point p : points ) {
+      WeightedEdge we = new WeightedEdge( p.edge( ), tooth.pointWeight( p ) );
+      set.balance( we, scale );
+    }
+    Edge from = tooth.crown( ).get( 0 );
+    ArrayList< Edge > directions = directions( );
+    directions.remove( from );  //can't balance the direction the tooth 'looks'
+    for ( Edge edge : directions ) {
+      WeightedEdge we = new WeightedEdge( edge , tooth.toothWeight( ) );
+      set.balance( we, scale );
+    }
+    //if ( scale != 0 ) {
+    //if ( loc.equals( new Location( 0, 1 ) ) ){
+    //println( "location: " + loc );
+    //println( "Scalar: " + scale );
+    //println( "TOOTH: " + tooth );
+    //println( "GNODE: " + node );
+    //}
+    return set;
+  }
+  
   double fitTooth( Tooth tooth, Location loc ) {
     double weight = 1.0;
     GNode currentNode = grid.get( loc );
@@ -102,12 +155,16 @@ class GGraph {
       Edge edge = tooth.crown( ).get( i );
       double w1 = currentNode.edgeWeight( edge ).eval( );
       double w2 = returnWeight( loc, edge ).eval( );
-      weight *= w1 * w2;
+      //weight *= ( w1 + w2 ) / 2;
+      //if ( loc.equals( new Location( 0, 1 ) ) ) println( w2 );
+      weight *= w2;
       loc = trace( loc, edge );
       currentNode = grid.get( loc );
-      //println( "current node: " + currentNode );
-      //println( "edge: " + edge );
-      //println( "weight: " + weight );
+      //if ( loc.equals( new Location( 0, 1 ) ) ) {
+      //  println( w1 );
+      //  println( w2 );
+      //  println( weight );
+      //}
     }
     double left =  currentNode.edgeWeight( tooth.root( ).left( )  ).eval( );
     double right = currentNode.edgeWeight( tooth.root( ).right( ) ).eval( );
@@ -126,7 +183,26 @@ class GGraph {
     return s;
   }
 
-  
+  void display( int scale, int xS, int yS ){
+    Set set = grid.keySet( );
+    for ( Object o : set ) {
+      Location l = ( Location ) o;
+      GNode n = grid.get( l );
+      float _x = xS + l.xloc( ) * scale;
+      float _y = yS + l.yloc( ) * scale;
+      for ( Edge e : directions( ) ) {
+        float _xto = _x + e.x( )*scale/2.05;
+        float _yto = _y + e.y( )*scale/2.05;
+        double weight = n.edgeWeight( e ).eval( );
+        int alpha = (int)(255 * weight);
+        stroke( 0, 0, 0, alpha );
+        line( _x, _y, _xto, _yto  );
+      }
+      //strokeWeight( 1 );
+      //ellipse( _x, _y, 8,8 );
+      //strokeWeight( 4 );
+    }
+  }
   
 }
 

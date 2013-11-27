@@ -82,11 +82,25 @@ class WeightedEdge extends Edge {
     weight = w;
   }
   
+  /*
   void balance( WeightedEdge edge ) {
     weight.balance( edge.weight( ) );
   }
+  */
+  
+  void balance( Ratio scaledRatio ) {
+    weight.balance( scaledRatio );
+  }
+  
   final Ratio weight( )   { return weight; }
   final Edge direction( ) { return ( Edge ) this; }
+  
+  public boolean equals( Object obj ){
+    if ( obj == this ) return true;
+    if ( obj == null || obj.getClass( ) != getClass( ) ) return false;
+    WeightedEdge e = ( WeightedEdge ) obj;
+    return super.x==e.x() && super.y==e.y();
+  }
   
   String toString( ) {
     String s = "( ";

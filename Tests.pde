@@ -1,7 +1,9 @@
 void setup ( ) {
   size( 400, 400 );
+  background ( 255, 255, 255 );
   smooth( );
-  strokeWeight( 2 );
+  strokeWeight( 4 );
+  strokeCap( SQUARE );
 /*
   //Generic Pair Test:
   Pair < Integer, Integer > p1 = new Pair < Integer, Integer > ( 1 , 2 );
@@ -119,16 +121,82 @@ void setup ( ) {
   th.addPoint( nw );
   th.addPoint( se );
   th.addPoint( w );
-  th.expandCrown( n );
+  th.expandCrown( s );
   th.forkRight( e );
   th.forkLeft( w );
+  println( "graph: " + graph );
+  println( "GNode: " + graph.setTooth( th, new Location( 2, 1 ), new GNode( ) ) );
+  println( "Setting: " + graph.setTooth( th, new Location ( 2, 1 ), new Setting( ) ) );
   //println( "trace: " + graph.trace( new Location ( 0, 0 ), n ) );
   GNode gnode = new GNode( );
-  Pair < GNode, Location > pair = graph.bufferTeeth( teeth, new Location ( 3, 1 ) );
-  gnode = pair.fst( );
-  graph.setBuffer( pair );
+
+  Pair < Setting, Location > pair1 = graph.bufferTeeth( teeth, new Location ( 1, 1 ) );//println( pair1.fst( ) );
+  Pair < Setting, Location > pair2 = graph.bufferTeeth( teeth, new Location ( 1, 2 ) );
+  Pair < Setting, Location > pair3 = graph.bufferTeeth( teeth, new Location ( 1, 3 ) );
+  Pair < Setting, Location > pair4 = graph.bufferTeeth( teeth, new Location ( 3, 1 ) );
+  Pair < Setting, Location > pair5 = graph.bufferTeeth( teeth, new Location ( 3, 2 ) );
+  Pair < Setting, Location > pair6 = graph.bufferTeeth( teeth, new Location ( 3, 3 ) );
+  Pair < Setting, Location > pair7 = graph.bufferTeeth( teeth, new Location ( 2, 1 ) );
+  Pair < Setting, Location > pair8 = graph.bufferTeeth( teeth, new Location ( 2, 3 ) );
+
+  graph.setBuffer( pair1 );
+  graph.setBuffer( pair2 );
+  graph.setBuffer( pair3 );
+  graph.setBuffer( pair4 );
+  graph.setBuffer( pair5 );
+  graph.setBuffer( pair6 );
+  graph.setBuffer( pair7 );
+  graph.setBuffer( pair8 );
+  //println( graph );
+
+
+  Pair < Setting, Location > pair21 = graph.bufferTeeth( teeth, new Location ( 0, 1 ) );
+  Pair < Setting, Location > pair41 = graph.bufferTeeth( teeth, new Location ( 0, 3 ) );
+  Pair < Setting, Location > pair71 = graph.bufferTeeth( teeth, new Location ( 4, 1 ) );
+  Pair < Setting, Location > pair12 = graph.bufferTeeth( teeth, new Location ( 4, 3 ) );
+  Pair < Setting, Location > pair42 = graph.bufferTeeth( teeth, new Location ( 3, 0 ) );
+  Pair < Setting, Location > pair52 = graph.bufferTeeth( teeth, new Location ( 1, 0 ) );
+  Pair < Setting, Location > pair72 = graph.bufferTeeth( teeth, new Location ( 3, 4 ) );
+  Pair < Setting, Location > pair82 = graph.bufferTeeth( teeth, new Location ( 1, 4 ) );
+  //gnode = pair.fst( );
+
+
+  graph.setBuffer( pair21 );
+  graph.setBuffer( pair41 );
+  graph.setBuffer( pair71 );
+  graph.setBuffer( pair12 );
+  graph.setBuffer( pair42 );
+  graph.setBuffer( pair52 );
+  graph.setBuffer( pair72 );
+  graph.setBuffer( pair82 );
+  
+  Pair < Setting, Location > pair11 = graph.bufferTeeth( teeth, new Location ( 0, 0 ) );
+  Pair < Setting, Location > pair22 = graph.bufferTeeth( teeth, new Location ( 4, 4 ) );
+  Pair < Setting, Location > pair61 = graph.bufferTeeth( teeth, new Location ( 4, 0 ) );
+  Pair < Setting, Location > pair51 = graph.bufferTeeth( teeth, new Location ( 0, 4 ) );
+
+  graph.setBuffer( pair11 );
+  graph.setBuffer( pair22 );
+  graph.setBuffer( pair61 );
+  graph.setBuffer( pair51 );
+
+  Pair < Setting, Location > pair31 = graph.bufferTeeth( teeth, new Location ( 0, 2 ) );
+  Pair < Setting, Location > pair32 = graph.bufferTeeth( teeth, new Location ( 2, 0 ) );
+  Pair < Setting, Location > pair81 = graph.bufferTeeth( teeth, new Location ( 4, 2 ) );
+  Pair < Setting, Location > pair62 = graph.bufferTeeth( teeth, new Location ( 2, 4 ) );
+
+  graph.setBuffer( pair31 );
+  graph.setBuffer( pair32 );
+  graph.setBuffer( pair81 );
+  graph.setBuffer( pair62 );
+
+
+
+
   //println( "gnode: " + gnode );
-  println( graph );
+  //println( graph );
+  graph.display( 60, 60, 60 );
+  //println( pair11.fst( ) );
 
 }
 

@@ -98,6 +98,8 @@ class GNode {
     else if( e.isSouthE() ) southeast.balance( w );
   }
   
+
+  
   Ratio edgeWeight( Edge e ) {
     if     ( e.isNorth()  ) return north;
     else if( e.isSouth()  ) return south;
@@ -110,6 +112,7 @@ class GNode {
     else return new Ratio( 0, 0 );
   }
   
+
   void closeState( ) { state = State.Closed; }
   void openState ( ) { state = State.Open; }
   
@@ -131,6 +134,36 @@ class GNode {
 
 class Seed extends ArrayList< WeightedEdge >{
 }
-
+class Setting extends ArrayList< WeightedEdge > {
+  
+  Setting ( ) {
+    super( );
+    initialize( );
+  }
+  
+  void initialize( ) {
+    for ( Edge e : directions( ) ) {
+      add( new WeightedEdge( e, new Ratio( 0, 0 ) ) );
+    }
+  }
+  
+  
+  void balance ( WeightedEdge edge, double scale ) {
+    Edge e = edge.direction( ); //balance Setting @ e...
+    Ratio w = edge.weight( );
+    w.scaleRatio( scale ); //...with the weight 'w' scaled as such
+    int idx = indexOf( edge );
+    WeightedEdge we = get( idx );
+    we.balance( w );
+  }
+  
+  /*
+  void balance ( WeightedEdge edge ) {
+    int idx = indexOf( edge );
+    WeightedEdge e = get( idx );
+    e.balance( edge );
+  }
+  */
+}
 
   
