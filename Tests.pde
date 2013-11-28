@@ -99,6 +99,8 @@ void setup ( ) {
   println( "2: " + teeth2.size( ) + teeth2 );
 */
 
+
+/*
   GGraph graph = new GGraph ( 5, 5 );
   Graph input = testInput( );
   Teeth teeth = input.extract( );
@@ -183,49 +185,51 @@ void setup ( ) {
   graph.setBuffer( pair22 );
   graph.setBuffer( pair61 );
   graph.setBuffer( pair51 );
-/*
-  pair21 = graph.bufferTeeth( teeth, new Location ( 0, 1 ) );
-  pair41 = graph.bufferTeeth( teeth, new Location ( 0, 3 ) );
-  pair71 = graph.bufferTeeth( teeth, new Location ( 4, 1 ) );
-  pair12 = graph.bufferTeeth( teeth, new Location ( 4, 3 ) );
-  pair42 = graph.bufferTeeth( teeth, new Location ( 3, 0 ) );
-  pair52 = graph.bufferTeeth( teeth, new Location ( 1, 0 ) );
-  pair72 = graph.bufferTeeth( teeth, new Location ( 3, 4 ) );
-  pair82 = graph.bufferTeeth( teeth, new Location ( 1, 4 ) );
 
-  
-  pair11 = graph.bufferTeeth( teeth, new Location ( 0, 0 ) );
-  pair22 = graph.bufferTeeth( teeth, new Location ( 4, 4 ) );
-  pair61 = graph.bufferTeeth( teeth, new Location ( 4, 0 ) );
-  pair51 = graph.bufferTeeth( teeth, new Location ( 0, 4 ) );
-
-  pair31 = graph.bufferTeeth( teeth, new Location ( 0, 2 ) );
-  pair32 = graph.bufferTeeth( teeth, new Location ( 2, 0 ) );
-  pair81 = graph.bufferTeeth( teeth, new Location ( 4, 2 ) );
-  pair62 = graph.bufferTeeth( teeth, new Location ( 2, 4 ) );
-
-  graph.setBuffer( pair31 );
-  graph.setBuffer( pair32 );
-  graph.setBuffer( pair81 );
-  graph.setBuffer( pair62 );
-
-  graph.setBuffer( pair21 );
-  graph.setBuffer( pair41 );
-  graph.setBuffer( pair71 );
-  graph.setBuffer( pair12 );
-  graph.setBuffer( pair42 );
-  graph.setBuffer( pair52 );
-  graph.setBuffer( pair72 );
-  graph.setBuffer( pair82 );
-
-  graph.setBuffer( pair11 );
-  graph.setBuffer( pair22 );
-  graph.setBuffer( pair61 );
-  graph.setBuffer( pair51 );
-*/
- 
 
   graph.display( 60, 60, 60 );
+  save( "test.jpg" );
+*/
+
+  GGraph grid = new GGraph( 11, 11 );
+  Graph input = testInput( );
+  Teeth teeth = input.extract( );
+  Ratio weight = new Ratio( 1, 1 );
+  
+  Seed seed = new Seed( );
+  
+  seed.add( new WeightedEdge( n, weight ) );
+  seed.add( new WeightedEdge( s, weight ) );
+  seed.add( new WeightedEdge( w, weight ) );
+  seed.add( new WeightedEdge( e, weight ) );
+  seed.add( new WeightedEdge( nw, weight ) );
+  seed.add( new WeightedEdge( ne, weight ) );
+  seed.add( new WeightedEdge( sw, weight ) );
+  seed.add( new WeightedEdge( se, weight ) );
+  
+  grid.setSeed( seed, new Location( 5, 5 ) );
+  
+  Valence vale = new Valence( 11, 11 );
+  vale.seed( new Location( 5, 5 ) );
+  vale.next( );
+
+
+for ( int i = 0; i < 2; ++i ) {
+  //println( "cur: " +vale.current( ) );
+  //println( "prev: " + vale.previous( ) );
+  ArrayList< Pair < Setting, Location > > buffer =
+    new ArrayList< Pair < Setting, Location > > ( );
+  for ( Location loc : vale.current( ) ) {
+    Pair < Setting, Location > pair = grid.bufferTeeth( teeth, loc );
+    buffer.add( pair );
+  }
+  for ( Pair< Setting, Location > p : buffer ) {
+    grid.setBuffer( p );
+  }
+  vale.next( );
+}
+  
+  grid.display( 40, 10, 10 );
 
 }
 

@@ -45,7 +45,7 @@ class GGraph {
     if ( l.yloc( ) < 0 ) l.yloc( high-1 );
     if ( l.yloc( ) == high ) l.yloc( 0 );
     return l;
-  } 
+  }
 
   //genesis
   void setSeed ( Seed seed, Location loc ) {

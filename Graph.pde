@@ -138,7 +138,7 @@ class Location {
     if ( obj == this ) return true;    
     if ( obj == null || obj.getClass( ) != getClass( ) ) return false;    
     Location l = ( Location ) obj;
-    return x == l.xloc( ) && y == l.yloc( );
+    return xloc( ) == l.xloc( ) && yloc( ) == l.yloc( );
   }
   
   public int hashCode( ) { return x * 10 + y; }
