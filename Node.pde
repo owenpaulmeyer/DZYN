@@ -83,7 +83,18 @@ class GNode {
     else if( e.isNorthE() ) northeast.balance( w );
     else if( e.isSouthW() ) southwest.balance( w );
     else if( e.isSouthE() ) southeast.balance( w );
-  } 
+  }
+
+  void setWeight ( Edge e, Ratio w ) {
+    if     ( e.isNorth()  ) north = w;
+    else if( e.isSouth()  ) south = w;
+    else if( e.isWest()   ) west = w;
+    else if( e.isEast()   ) east = w;
+    else if( e.isNorthW() ) northwest = w;
+    else if( e.isNorthE() ) northeast = w;
+    else if( e.isSouthW() ) southwest = w;
+    else if( e.isSouthE() ) southeast = w;
+  }
 
   Ratio edgeWeight( Edge e ) {
     if     ( e.isNorth()  ) return north;

@@ -75,6 +75,33 @@ class GGraph {
       oppositeNode.balance ( new WeightedEdge( oppositeEdge, edge.weight( ) ), 1.0 ); 
     } 
   }
+  
+  void decide ( Location loc ) {
+    GNode node = grid.get( loc );
+    double threshold = threshold( );
+    for ( Edge edge : directions( ) ) {
+      double weight = node.edgeWeight( edge ).eval( );
+      if ( weight > threshold ) {
+        println( "weight: " + weight );
+        Ratio w = new Ratio( 1, 1 );
+        node.setWeight( edge, w );
+        setOpposite( loc, edge, w );
+      }
+      else {
+        println( "weight: " + weight );
+        Ratio w = new Ratio ( 0, 0 ) ;
+        node.setWeight( edge, w );
+        setOpposite( loc, edge, w );
+      }
+    }
+  }
+  
+  void setOpposite( Location loc, Edge edge, Ratio weight ) {
+    Location l = trace( loc, edge );
+    GNode oppositeNode = grid.get( l );
+    Edge oppositeEdge = edge.inverse( );
+    oppositeNode.setWeight( oppositeEdge, weight );
+  }
 
   //for setting aside the results of setting a set of teeth per location
   //to be balanced into the grid on a per valence schedule

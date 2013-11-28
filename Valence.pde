@@ -32,9 +32,7 @@ class Valence {
             !previous.contains( loc ) &&
             !next.contains( loc ) ) next.add( loc );
       }
-    println( "prev:  " + previous );
-    println( "curr:  " + current );
-    println( "next:  " + next );
+
     previous.addAll( current );
     current = next;
   }

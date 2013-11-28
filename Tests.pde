@@ -1,5 +1,5 @@
 void setup ( ) {
-  size( 400, 400 );
+  size( 800, 800 );
   background ( 255, 255, 255 );
   smooth( );
   strokeWeight( 4 );
@@ -191,7 +191,7 @@ void setup ( ) {
   save( "test.jpg" );
 */
 
-  GGraph grid = new GGraph( 11, 11 );
+  GGraph grid = new GGraph( 22, 22 );
   Graph input = testInput( );
   Teeth teeth = input.extract( );
   Ratio weight = new Ratio( 1, 1 );
@@ -208,13 +208,20 @@ void setup ( ) {
   seed.add( new WeightedEdge( se, weight ) );
   
   grid.setSeed( seed, new Location( 5, 5 ) );
+  grid.setSeed( seed, new Location( 16, 5 ) );
+  grid.setSeed( seed, new Location( 5, 16 ) );
+  grid.setSeed( seed, new Location( 16, 16 ) );
   
-  Valence vale = new Valence( 11, 11 );
+  Valence vale = new Valence( 22, 22 );
   vale.seed( new Location( 5, 5 ) );
+  vale.seed( new Location( 16, 5 ) );
+  vale.seed( new Location( 5, 16 ) );
+  vale.seed( new Location( 16, 16 ) );
+  
   vale.next( );
 
 
-for ( int i = 0; i < 2; ++i ) {
+for ( int i = 0; i < 5; ++i ) {
   //println( "cur: " +vale.current( ) );
   //println( "prev: " + vale.previous( ) );
   ArrayList< Pair < Setting, Location > > buffer =
@@ -226,10 +233,15 @@ for ( int i = 0; i < 2; ++i ) {
   for ( Pair< Setting, Location > p : buffer ) {
     grid.setBuffer( p );
   }
+  for ( Location loc : vale.current( ) ) {
+    grid.decide( loc );
+  }
   vale.next( );
 }
   
-  grid.display( 40, 10, 10 );
+  grid.display( 20, 20, 20 );
+  
+  save( "result.jpg" );
 
 }
 

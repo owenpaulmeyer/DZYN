@@ -29,7 +29,11 @@
   final Edge reflectX( Edge edge ) {
     return new Edge( edge.x( ) * -1, edge.y( ) );
   }
-  
+
+  double threshold( ) {
+    return .45;
+    
+  }
   
 Graph testInput( ) {
   Graph design = new Graph( 2, 2 );
